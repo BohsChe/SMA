@@ -8,10 +8,16 @@ import {MatGridListModule} from '@angular/material/grid-list';
   styleUrls: ['./login-component.component.css']
 })
 export class LoginComponentComponent implements OnInit {
+  public loginModel:any = {};
+  public registerModel:any = {};
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  loginUser(){
+    alert( JSON.stringify( this.loginModel) );
   }
 
 }
