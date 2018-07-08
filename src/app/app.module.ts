@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { FormsModule }   from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
@@ -17,18 +19,21 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { HttpRequestServiceService } from './services/http-request-service.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { FarmersComponent } from './farmers/farmers.component';
+import { VillageComponent } from './village/village.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponentComponent,
-    FarmersComponent
+    FarmersComponent,
+    VillageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FormsModule,
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
@@ -38,7 +43,8 @@ import { FarmersComponent } from './farmers/farmers.component';
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
   ],
   exports: [
     BrowserAnimationsModule,
