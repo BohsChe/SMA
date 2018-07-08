@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {HttpRequestServiceService} from '../services/http-request-service.service';
+
 
 @Component({
   selector: 'app-farmers',
@@ -8,6 +10,7 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 })
 export class FarmersComponent implements OnInit {
   displayedColumns = ['position', 'name', 'weight', 'symbol'];
+  httpRequestService: HttpRequestServiceService;
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -16,11 +19,28 @@ export class FarmersComponent implements OnInit {
     filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
     this.dataSource.filter = filterValue;
   }
-  constructor() { 
+  constructor(httpRequestService: HttpRequestServiceService) { 
     this.dataSource.paginator = this.paginator;
+    this.httpRequestService = httpRequestService;
   }
 
   ngOnInit() {
+    this.getFarmerList();
+  }
+
+  getFarmerList(){
+    this.httpRequestService.getFarmersByVillageName({
+      mobileNo: "9941840511",
+      villageName: "jangampalle",
+      milkType: "C"
+    })
+    .subscribe(data => {
+      if(data['responseCode'] == 200){
+        this.dataSource = new MatTableDataSource(data['data']);
+      }
+    }, error => {
+      console.error(JSON.stringify(error));
+    });
   }
 
 }
