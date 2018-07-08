@@ -33,3 +33,9 @@ ng generate component my-new-component --module=app
 
 Add new service
 ng generate service my-new-service
+
+to create new class 
+ng generate class <class_name>
+
+## Starter guide
+npm install -g @angular/cli
