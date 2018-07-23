@@ -3,7 +3,7 @@ body{
 }
 .mat-card{
     min-width: 320px;
-    height: 300px;
+    height: auto;
     text-align: center;
     padding: 20px 50px;
 }
@@ -20,7 +20,7 @@ body{
     background: rgba(143,153,153,1);
     background: -moz-linear-gradient(left, rgba(143,153,153,1) 0%, rgba(38,64,89,1) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(143,153,153,1)), color-stop(100%, rgba(38,64,89,1)));
-    background: -webkit-linear-gradient(left, rgba(143,153,153,1) 0%, rgba(38,64,89,1) 100%);
+    background: -webkit-linear-gradient(left, rgb(58, 182, 182) 0%, rgba(38,64,89,1) 100%);
     background: -o-linear-gradient(left, rgba(143,153,153,1) 0%, rgba(38,64,89,1) 100%);
     background: -ms-linear-gradient(left, rgba(143,153,153,1) 0%, rgba(38,64,89,1) 100%);
     background: linear-gradient(to right, #ff4040 0%, rgba(38,64,89,1) 100%);

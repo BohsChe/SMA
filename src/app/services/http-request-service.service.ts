@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserAuthInfo } from '../Models/user-auth-info';
+import { environment } from '../../environments/environment';
 
 @Injectable()
 export class HttpRequestServiceService {
-  pageUrl: string = "http://shivajimilkcenter.in/MilkProduct/";
+  pageUrl: string = environment.apiUrl;
   userDetails: any = {
     mobileNo: "9941840511"
   };
@@ -18,7 +19,17 @@ export class HttpRequestServiceService {
    * @param UserAuthInfo
    */
   authenticateUser(userDetails: UserAuthInfo){
-    this.httpClient.post('/userdetail', userDetails);
+    const options = { 
+      params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+      .set('password', this.userDetails.password)
+      .set('deviceId', this.userDetails.deviceId)
+      .set('deviceModel', this.userDetails.deviceModel)
+      .set('deviceType', this.userDetails.deviceType),
+      headers: new HttpHeaders()
+      .set('Content-Type', 'application/x-www-form-urlencoded')
+    };
+    return this.httpClient.post(this.pageUrl + '/registerOrLogin.php', userDetails);
   }
 
   /**
@@ -26,7 +37,7 @@ export class HttpRequestServiceService {
    * @param
    */
   addCollectionAgent(agentInfo){
-    return this.httpClient.get('/addCollectionAgent.php', agentInfo);
+    return this.httpClient.get(this.pageUrl + '/addCollectionAgent.php', agentInfo);
   }
 
   /**
@@ -34,21 +45,25 @@ export class HttpRequestServiceService {
    */
   getAllCollectionAgents(){
     // TO DO: get user details and sent
-    return this.httpClient.get('/getCollectionAgents.php');
+    return this.httpClient.get(this.pageUrl + '/getCollectionAgents.php');
   }
 
   /**
    * To update an agent info
    */
   updateAgentInfo(agentInfo){
-    return this.httpClient.get('/updateCollectionAgent.php', agentInfo);
+    return this.httpClient.get(this.pageUrl + '/updateCollectionAgent.php', agentInfo);
   }
 
   /**
    * Add a village
    */
   addVillage(villageInfo){
-    return this.httpClient.get('/addVillage.php', villageInfo);
+    const options = { params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+      .set('villageName', villageInfo.villageName)
+    };
+    return this.httpClient.get(this.pageUrl + '/addVillage.php', options);
   }
 
   /**
@@ -59,28 +74,28 @@ export class HttpRequestServiceService {
     const options = { params: new HttpParams()
       .set('mobileNo', this.userDetails.mobileNo)
     };
-    return this.httpClient.get('http://shivajimilkcenter.in/MilkProduct/getVillages.php', options);
+    return this.httpClient.get(this.pageUrl + '/getVillages.php', options);
   }
 
   /**
    * update a village info
    */
   updateVillageInfo(villageInfo){
-    return this.httpClient.get('/updateVillageName.php', villageInfo);
+    return this.httpClient.get(this.pageUrl + '/updateVillageName.php', villageInfo);
   }
 
   /**
    * add a farmer
    */
   addFarmer(farmerInfo){
-    return this.httpClient.get('/addFarmer.php', farmerInfo);
+    return this.httpClient.get(this.pageUrl + '/addFarmer.php', farmerInfo);
   }
 
   /**
    * Add or update fat rate
    */
   addOrUpdateFatRate(fatInfo){
-    return this.httpClient.get('/addFarmer.php', fatInfo);
+    return this.httpClient.get(this.pageUrl + '/addFarmer.php', fatInfo);
   }
 
   /**
@@ -93,21 +108,21 @@ export class HttpRequestServiceService {
       .set('villageName', villageInfo.villageName)
       .set('milkType', villageInfo.milkType)
     };
-    return this.httpClient.get('http://shivajimilkcenter.in/MilkProduct/getAllFarmersOfVillage.php', options);
+    return this.httpClient.get(this.pageUrl + '/getAllFarmersOfVillage.php', options);
   }
 
   /**
    * update farmer info
    */
   updateFarmerInfo(farmerInfo){
-    return this.httpClient.get('/updateFarmer.php', farmerInfo);
+    return this.httpClient.get(this.pageUrl + '/updateFarmer.php', farmerInfo);
   }
 
   /**
    * to insert transaction
    */
   insertTransaction(transactionInfo){
-    return this.httpClient.get('/insertTransaction.php', transactionInfo);
+    return this.httpClient.get(this.pageUrl + '/insertTransaction.php', transactionInfo);
   }
 
   /**

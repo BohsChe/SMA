@@ -1,7 +1,44 @@
-<!-- <table mat-table [dataSource]="villageList">
-  
-</table> -->
-<mat-paginator [length]="100"
-              [pageSize]="10"
-              [pageSizeOptions]="[5, 10, 25, 100]">
-</mat-paginator>
+<div class="pagination-container mat-elevation-z8">
+    <mat-card>
+        <!-- <h1>Villages</h1> -->
+        <div class="pagination-header">
+            <mat-form-field>
+                <input matInput
+                    (keyup)="applyFilter($event.target.value)"
+                    placeholder="Filter">
+            </mat-form-field>
+            <button class="mat-primary"
+                mat-raised-button (click)="addVillage()">Add
+            </button>
+        </div>
+    </mat-card>
+    <mat-table #table
+        [dataSource]="villageList">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="village_id">
+            <mat-header-cell *matHeaderCellDef>Village Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.village_id}} </mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="village_name">
+            <mat-header-cell *matHeaderCellDef> Village Name </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.village_name}} </mat-cell>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="user_id">
+            <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    </mat-table>
+    <mat-paginator #paginator
+        [pageSize]="10"
+        [pageSizeOptions]="[5, 10, 20]"
+        [showFirstLastButtons]="true">
+    </mat-paginator>
+</div>

@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import {HttpRequestServiceService} from '../services/http-request-service.service';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+
+import {HttpRequestServiceService} from '../services/http-request-service.service';
 
 @Component({
   selector: 'app-village',
@@ -10,9 +11,19 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 export class VillageComponent implements OnInit {
   httpRequestService: HttpRequestServiceService;
   villageList: any = new MatTableDataSource();
+  villageMasterList: village[];
+  displayedColumns = ['village_id', 'village_name', 'user_id'];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(httpRequestService: HttpRequestServiceService) {
     this.httpRequestService = httpRequestService;
+    this.villageList.paginator = this.paginator;
+  }
+
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.villageList.filter = filterValue;
   }
 
   ngOnInit() {
@@ -23,8 +34,32 @@ export class VillageComponent implements OnInit {
     this.httpRequestService.getAllVillages()
     .subscribe(data => {
       if(data['responseCode'] == 200){
-        debugger;
-        this.villageList = new MatTableDataSource(data['data']);
+        this.villageMasterList = data['data'];
+        this.villageList = new MatTableDataSource(this.villageMasterList);
+      }
+    }, error => {
+      console.error(JSON.stringify(error));
+    });
+  }
+
+  /**
+   * add village to the list
+   */
+  addVillage(){
+    this.httpRequestService.addVillage({
+      mobileNo: '9941840511',
+      villageName: 'jangampalle123'
+    })
+    .subscribe(data => {
+      if(data['responseCode'] == 200){
+        this.villageMasterList.push({
+          village_id: '#',
+          village_name: 'jangampalle123',
+          user_id: 9
+        });
+        this.villageList = new MatTableDataSource(this.villageMasterList);
+      }else if(data['responseCode'] == 200){
+        alert(data['responseMessage']);
       }
     }, error => {
       console.error(JSON.stringify(error));

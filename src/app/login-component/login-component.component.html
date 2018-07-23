@@ -1,52 +1,94 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<div fxLayout="row" fxFlex fxLayoutAlign="center center">
+<div fxLayout="row"
+  fxFlex
+  fxLayoutAlign="center center">
   <mat-card>
     <mat-tab-group>
       <mat-tab label="Login">
         <div class="login-form-card">
-          <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+          <form name="form"
+            (ngSubmit)="f.form.valid && onLoginSubmit()"
+            #f="ngForm"
+            novalidate>
             <mat-form-field class="example-full-width">
-              <input placeholder="Enter your mobile number" matInput type="text" class="form-control" name="email" [(ngModel)]="loginModel.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }"
-                required email />
+              <input matInput
+                placeholder="Enter your Mobile Number"
+                name="loginMobileNo"
+                [(ngModel)]="loginModel.mobileNo"
+                [formControl]="phoneFormControl"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="(phoneFormControl.hasError('minLength') || phoneFormControl.hasError('maxLength') )&& !phoneFormControl.hasError('required')">
+                Mobile number should be <strong>10 digits</strong>
+              </mat-error>
+              <mat-error *ngIf="phoneFormControl.hasError('required')">
+                Mobile number is
+                <strong>required</strong>
+              </mat-error>
             </mat-form-field>
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
-              <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.email">Email must be a valid email address</div>
-            </div>
             <mat-form-field class="example-full-width">
-              <input placeholder="Password" matInput type="password" class="form-control" name="password" [(ngModel)]="loginModel.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
-                required minlength="6" />
+              <input placeholder="Password"
+                matInput
+                type="password"
+                name="loginPassword"
+                [(ngModel)]="loginModel.password"
+                [formControl]="passwordFormControl"
+                [errorStateMatcher]="matcher">
+                <mat-error *ngIf="passwordFormControl.hasError('required')">
+                  password is <strong>mandatory</strong>
+                </mat-error>
             </mat-form-field>
-            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
-              <div *ngIf="password.errors.required">Password is required</div>
-              <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
-            </div>
-            <button class="mat-primary" mat-raised-button>Login</button>
+           
+            <button type="submit"
+              class="mat-primary"
+              mat-raised-button>Login</button>
           </form>
         </div>
       </mat-tab>
       <mat-tab label="Register">
-        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+        <form name="form"
+          (ngSubmit)="rf.form.valid && onRegisterSubmit()"
+          #rf="ngForm"
+          novalidate>
           <div>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Enter your mobile number" value="" name="email" [(ngModel)]="registerModel.email" #email="ngModel" [ngClass]="{ 'is-invalid': f.submitted && email.invalid }" required email>
+              <input matInput
+                placeholder="Enter your mobile number"
+                value=""
+                name="email"
+                [(ngModel)]="registerModel.email"
+                #email="ngModel"
+                [ngClass]="{ 'is-invalid': rf.submitted && email.invalid }"
+                required
+                email>
             </mat-form-field>
-            <div *ngIf="f.submitted && email.invalid" class="invalid-feedback">
+            <div *ngIf="rf.submitted && email.invalid"
+              class="invalid-feedback">
               <div *ngIf="email.errors.required">Email is required</div>
               <div *ngIf="email.errors.email">Email must be a valid email address</div>
             </div>
           </div>
           <div>
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Password" value="" name="password" [(ngModel)]="registerModel.password" #password="ngModel" [ngClass]="{ 'is-invalid': f.submitted && password.invalid }"
-              required minlength="6">
+              <input type="password"
+                matInput
+                placeholder="Password"
+                value=""
+                name="password"
+                [(ngModel)]="registerModel.password"
+                #password="ngModel"
+                [ngClass]="{ 'is-invalid': rf.submitted && password.invalid }"
+                required
+                minlength="6">
             </mat-form-field>
-            <div *ngIf="f.submitted && password.invalid" class="invalid-feedback">
+            <div *ngIf="rf.submitted && password.invalid"
+              class="invalid-feedback">
               <div *ngIf="password.errors.required">Password is required</div>
               <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
             </div>
           </div>
-          <button class="mat-primary" mat-raised-button>Register
+          <button type="submit"
+            class="mat-primary"
+            mat-raised-button>Register
           </button>
         </form>
       </mat-tab>
