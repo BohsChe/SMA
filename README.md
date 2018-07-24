@@ -39,3 +39,6 @@ ng generate class <class_name>
 
 ## Starter guide
 npm install -g @angular/cli
+
+## Build command
+ng build --base-href "/milkcenter/" --prod
