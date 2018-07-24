@@ -1,11 +1,12 @@
+// Angular Core modules
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+// Material UI components
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
 import {MatInputModule} from '@angular/material/input';
 import {MatCardModule} from '@angular/material/card';
@@ -14,13 +15,18 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
+
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import { AppComponent } from './app.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { HttpRequestServiceService } from './services/http-request-service.service';
 import { AppRoutingModule } from './/app-routing.module';
 import { FarmersComponent } from './farmers/farmers.component';
+
+// village
 import { VillageComponent } from './village/village.component';
+import { AddVillageDialogComponent } from './village/add/add.village.dialog.component';
 
 
 @NgModule({
@@ -28,7 +34,8 @@ import { VillageComponent } from './village/village.component';
     AppComponent,
     LoginComponentComponent,
     FarmersComponent,
-    VillageComponent
+    VillageComponent,
+    AddVillageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -45,8 +52,12 @@ import { VillageComponent } from './village/village.component';
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
+    MatDialogModule,
     AppRoutingModule,
     HttpClientModule,
+  ],
+  entryComponents: [
+    AddVillageDialogComponent
   ],
   exports: [
     BrowserAnimationsModule,
@@ -58,7 +69,8 @@ import { VillageComponent } from './village/village.component';
     MatToolbarModule,
     MatTabsModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatDialogModule
   ],
   providers: [HttpRequestServiceService,
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}

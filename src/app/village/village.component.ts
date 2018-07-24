@@ -1,7 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
-
+import {MatDialog} from '@angular/material';
 import {HttpRequestServiceService} from '../services/http-request-service.service';
+
+import {AddVillageDialogComponent} from './add/add.village.dialog.component';
 
 @Component({
   selector: 'app-village',
@@ -13,9 +15,11 @@ export class VillageComponent implements OnInit {
   villageList: any = new MatTableDataSource();
   villageMasterList: village[];
   displayedColumns = ['village_id', 'village_name', 'user_id'];
+  addVillageName: string;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(httpRequestService: HttpRequestServiceService) {
+  constructor(httpRequestService: HttpRequestServiceService, public dialog: MatDialog) {
     this.httpRequestService = httpRequestService;
     this.villageList.paginator = this.paginator;
   }
@@ -28,6 +32,18 @@ export class VillageComponent implements OnInit {
 
   ngOnInit() {
     this.getVillagesList();
+  }
+
+  openAddVillageDialog(){
+    const dialogRef = this.dialog.open(AddVillageDialogComponent, {
+      width: '250px',
+      data: {villageName: this.addVillageName}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.addVillageName = result;
+    });
   }
 
   getVillagesList(){
