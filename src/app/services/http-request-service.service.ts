@@ -8,7 +8,10 @@ import { environment } from '../../environments/environment';
 export class HttpRequestServiceService {
   pageUrl: string = environment.apiUrl;
   userDetails: any = {
-    mobileNo: "9941840511"
+    mobileNo: "9941840511",
+    deviceId: "test",
+    deviceModel: "t",
+    deviceType: "testType"
   };
   constructor(private httpClient: HttpClient) {
 
@@ -21,15 +24,14 @@ export class HttpRequestServiceService {
   authenticateUser(userDetails: UserAuthInfo){
     const options = { 
       params: new HttpParams()
-      .set('mobileNo', this.userDetails.mobileNo)
-      .set('password', this.userDetails.password)
+      .set('mobileNo', userDetails.mobileNo)
+      .set('password', userDetails.password)
       .set('deviceId', this.userDetails.deviceId)
       .set('deviceModel', this.userDetails.deviceModel)
-      .set('deviceType', this.userDetails.deviceType),
-      headers: new HttpHeaders()
-      .set('Content-Type', 'application/x-www-form-urlencoded')
-    };
-    return this.httpClient.post(this.pageUrl + '/registerOrLogin.php', userDetails);
+      .set('deviceType', this.userDetails.deviceType)
+      .set('isLogin', userDetails.isLogin)
+     };
+    return this.httpClient.get(this.pageUrl + '/registerOrLogin.php', options);
   }
 
   /**

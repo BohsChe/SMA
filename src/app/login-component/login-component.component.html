@@ -55,17 +55,17 @@
                 placeholder="Enter your mobile number"
                 value=""
                 name="email"
-                [(ngModel)]="registerModel.email"
-                #email="ngModel"
-                [ngClass]="{ 'is-invalid': rf.submitted && email.invalid }"
-                required
-                email>
+                [(ngModel)]="registerModel.mobileNo"
+                [formControl]="phoneFormControl"
+                [errorStateMatcher]="matcher">
+              <mat-error *ngIf="(phoneFormControl.hasError('minLength') || phoneFormControl.hasError('maxLength') )&& !phoneFormControl.hasError('required')">
+                Mobile number should be <strong>10 digits</strong>
+              </mat-error>
+              <mat-error *ngIf="phoneFormControl.hasError('required')">
+                Mobile number is
+                <strong>required</strong>
+              </mat-error>
             </mat-form-field>
-            <div *ngIf="rf.submitted && email.invalid"
-              class="invalid-feedback">
-              <div *ngIf="email.errors.required">Email is required</div>
-              <div *ngIf="email.errors.email">Email must be a valid email address</div>
-            </div>
           </div>
           <div>
             <mat-form-field class="example-full-width">

@@ -21,10 +21,10 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 })
 export class LoginComponentComponent implements OnInit {
   public loginModel:any = {
-    'isLogin': 2
+    'isLogin': 1
   };
   public registerModel:any = {
-    'isLogin': 1
+    'isLogin': 2
   };
   private HttpRequestServiceService: HttpRequestServiceService;
   emailFormControl = new FormControl('', [

@@ -1,8 +1,8 @@
 export class UserAuthInfo {
-    mobileNo: Number;
+    mobileNo: string;
     password: string;
     deviceId: string;
     deviceModel: string;
     deviceType: string;
-    isLogin: Number; // 1 - login, 3 - register
+    isLogin: string; // 1 - login, 3 - register
 }
