@@ -12,6 +12,9 @@ export interface AddVillageDialogData {
     templateUrl: 'add.village.dialog.html',
 })
 export class AddVillageDialogComponent {
+    addVillageInfo: any = {
+        
+    }
     phoneFormControl = new FormControl('', [
         Validators.required,
         Validators.minLength(10),

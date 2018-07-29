@@ -9,7 +9,7 @@
             <input matInput
                 placeholder="Village Name"
                 name="villageName"
-                [(ngModel)]="loginModel.villageName"
+                [(ngModel)]="addVillageInfo.villageName"
                 [formControl]="villageNameFormControl"
                 [errorStateMatcher]="matcher">
             <mat-error *ngIf="villageNameFormControl.hasError('required')">
