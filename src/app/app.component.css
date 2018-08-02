@@ -2,7 +2,6 @@ body{
     margin: 0px;
 }
 .mat-card{
-    min-width: 320px;
     height: auto;
     text-align: center;
     padding: 20px 50px;

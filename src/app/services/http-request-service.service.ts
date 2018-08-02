@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import { UserAuthInfo } from '../Models/user-auth-info';
+import { UserAuthInfo, VillageModel } from '../Models/user-auth-info';
 import { environment } from '../../environments/environment';
 
 @Injectable()
@@ -11,10 +11,23 @@ export class HttpRequestServiceService {
     mobileNo: "9941840511",
     deviceId: "test",
     deviceModel: "t",
-    deviceType: "testType"
+    deviceType: "testType",
+    userId: ''
   };
   constructor(private httpClient: HttpClient) {
+    if( localStorage.getItem("userId") != null){
+      let userDetails = JSON.parse(localStorage.getItem("userId"));
+      this.userDetails.mobileNo = userDetails.mobileNo;
+      this.userDetails.userId = userDetails.userId;
+    }
+  }
 
+  setUserMobileNo(mobileNo: string){
+    this.userDetails.mobileNo = mobileNo;
+  }
+
+  getUserDetails(){
+    return this.userDetails;
   }
 
   /**

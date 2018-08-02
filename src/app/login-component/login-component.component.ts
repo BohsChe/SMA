@@ -1,10 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
-import {FormControl, FormGroupDirective, NgForm, Validators, FormGroup} from '@angular/forms';
-import {ErrorStateMatcher} from '@angular/material/core';
+import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup } from '@angular/forms';
+import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
+
+import {MatSnackBar} from '@angular/material';
+
 
 // custom service import
-import {HttpRequestServiceService} from '../services/http-request-service.service';
+import {CustomSnackbarsComponent} from '../custom-snackbars/custom-snackbars.component';
+import { HttpRequestServiceService } from '../services/http-request-service.service';
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -20,12 +24,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./login-component.component.css']
 })
 export class LoginComponentComponent implements OnInit {
-  public loginModel:any = {
+  public loginModel: any = {
     'isLogin': 1
   };
-  public registerModel:any = {
+  public registerModel: any = {
     'isLogin': 2
   };
+  public router: Router;
   private HttpRequestServiceService: HttpRequestServiceService;
   emailFormControl = new FormControl('', [
     Validators.required,
@@ -43,10 +48,11 @@ export class LoginComponentComponent implements OnInit {
     Validators.required,
     Validators.minLength(6)
   ]);
-  
+
   matcher = new MyErrorStateMatcher();
-  constructor(HttpRequestServiceService: HttpRequestServiceService) {
+  constructor(HttpRequestServiceService: HttpRequestServiceService, router: Router, public snackBar: MatSnackBar) {
     this.HttpRequestServiceService = HttpRequestServiceService;
+    this.router = router;
   }
 
   ngOnInit() {
@@ -54,12 +60,32 @@ export class LoginComponentComponent implements OnInit {
 
   onLoginSubmit() {
     this.HttpRequestServiceService.authenticateUser(this.loginModel)
-    .subscribe((data: any) => alert(data));
+      .subscribe((data: any) => {
+        if (data.responseCode == 200) {
+          this.router.navigateByUrl('/villages');
+          this.loginModel.userId = data['data'];
+          localStorage.removeItem("userId");
+          localStorage.setItem("userId", JSON.stringify(this.loginModel) );
+          this.HttpRequestServiceService.setUserMobileNo(this.loginModel.mobileNo);
+          this.openSnackBar(data['responseMessage'], "SUCCESS");
+        }else{
+          this.openSnackBar(data['responseMessage'], "ERROR");
+        }
+      });
   }
 
-  onRegisterSubmit(){
+  onRegisterSubmit() {
     this.HttpRequestServiceService.authenticateUser(this.registerModel)
-    .subscribe((data: any) => alert(data));
+      .subscribe((data: any) => alert(data));
+  }
+
+  openSnackBar(message: string, action: string,) {
+    this.snackBar.open(message, action, {
+      announcementMessage: "announce",
+      data: "data",
+      direction: "ltr",
+      duration: 1000
+    })
   }
 
 }

@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 // Material UI components
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
@@ -16,6 +17,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import { AppComponent } from './app.component';
@@ -43,6 +45,7 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
     FlexLayoutModule,
     FormsModule,
     ReactiveFormsModule,
+    RouterModule,
     MatButtonModule,
     MatCheckboxModule,
     MatInputModule,
@@ -53,6 +56,7 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatSnackBarModule,
     AppRoutingModule,
     HttpClientModule,
   ],
@@ -70,7 +74,8 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
     MatTabsModule,
     MatTableModule,
     MatPaginatorModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [HttpRequestServiceService,
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}

@@ -6,3 +6,9 @@ export class UserAuthInfo {
     deviceType: string;
     isLogin: string; // 1 - login, 3 - register
 }
+
+export interface VillageModel {
+    village_id: string;
+    user_id: number;
+    village_name: string;
+}

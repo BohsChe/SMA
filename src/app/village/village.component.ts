@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
-import {MatDialog} from '@angular/material';
-import {HttpRequestServiceService} from '../services/http-request-service.service';
+import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
+import { MatDialog } from '@angular/material';
+import { HttpRequestServiceService } from '../services/http-request-service.service';
 
-import {AddVillageDialogComponent} from './add/add.village.dialog.component';
+import { AddVillageDialogComponent } from './add/add.village.dialog.component';
 
 @Component({
   selector: 'app-village',
@@ -14,14 +14,15 @@ export class VillageComponent implements OnInit {
   httpRequestService: HttpRequestServiceService;
   villageList: any = new MatTableDataSource();
   villageMasterList: village[];
-  displayedColumns = ['village_id', 'village_name', 'user_id'];
-  addVillageName: string;
+  displayedColumns = ['village_id', 'village_name', 'user_id', 'action_edit', 'action_add', 'action_delete'];
+  addVillageName: any;
+  villageTotalCount: Number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   constructor(httpRequestService: HttpRequestServiceService, public dialog: MatDialog) {
     this.httpRequestService = httpRequestService;
-    this.villageList.paginator = this.paginator;
   }
 
   applyFilter(filterValue: string) {
@@ -34,52 +35,54 @@ export class VillageComponent implements OnInit {
     this.getVillagesList();
   }
 
-  openAddVillageDialog(){
+  openAddVillageDialog() {
     const dialogRef = this.dialog.open(AddVillageDialogComponent, {
       width: '250px',
-      data: {villageName: this.addVillageName}
+      data: { villageName: this.addVillageName }
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      this.addVillageName = result;
+      this.getVillagesList();
     });
   }
 
-  getVillagesList(){
+  getVillagesList() {
     this.httpRequestService.getAllVillages()
-    .subscribe(data => {
-      if(data['responseCode'] == 200){
-        this.villageMasterList = data['data'];
-        this.villageList = new MatTableDataSource(this.villageMasterList);
-      }
-    }, error => {
-      console.error(JSON.stringify(error));
-    });
+      .subscribe(data => {
+        if (data['responseCode'] == 200) {
+          this.villageMasterList = data['data'];
+          this.villageTotalCount = data['data'].length;
+          this.villageList = new MatTableDataSource(this.villageMasterList);
+          this.villageList.paginator = this.paginator;
+          this.villageList.sort = this.sort;
+        }
+      }, error => {
+        console.error(JSON.stringify(error));
+      });
   }
 
   /**
    * add village to the list
    */
-  addVillage(){
+  addVillage() {
     this.httpRequestService.addVillage({
       mobileNo: '9941840511',
       villageName: 'jangampalle123'
     })
-    .subscribe(data => {
-      if(data['responseCode'] == 200){
-        this.villageMasterList.push({
-          village_id: '#',
-          village_name: 'jangampalle123',
-          user_id: 9
-        });
-        this.villageList = new MatTableDataSource(this.villageMasterList);
-      }else if(data['responseCode'] == 200){
-        alert(data['responseMessage']);
-      }
-    }, error => {
-      console.error(JSON.stringify(error));
-    });
+      .subscribe(data => {
+        if (data['responseCode'] == 200) {
+          this.villageMasterList.push({
+            village_id: '#',
+            village_name: 'jangampalle123',
+            user_id: 9
+          });
+          this.villageList = new MatTableDataSource(this.villageMasterList);
+        } else if (data['responseCode'] == 200) {
+          alert(data['responseMessage']);
+        }
+      }, error => {
+        console.error(JSON.stringify(error));
+      });
   }
 
 }
