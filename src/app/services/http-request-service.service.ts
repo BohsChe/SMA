@@ -96,7 +96,12 @@ export class HttpRequestServiceService {
    * update a village info
    */
   updateVillageInfo(villageInfo){
-    return this.httpClient.get(this.pageUrl + '/updateVillageName.php', villageInfo);
+    const options = { params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+      .set('oldVillageName', villageInfo.oldVillageName)
+      .set('newVillageName', villageInfo.newVillageName)
+    };
+    return this.httpClient.get(this.pageUrl + '/updateVillageName.php', options);
   }
 
   /**

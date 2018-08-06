@@ -40,22 +40,26 @@
                 <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
             </ng-container>
 
-            <!-- Weight Column -->
+            <!-- Edit Village Column -->
             <ng-container matColumnDef="action_edit">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> User Id </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button class="mat-primary"
+                        mat-raised-button
+                        (click)="openEditVillageDialog(element.village_name)">Edit
+                    </button>
+                </mat-cell>
             </ng-container>
 
-            <!-- Weight Column -->
-            <ng-container matColumnDef="action_add" mat-sort-header>
-                <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
-            </ng-container>
-
-            <!-- Weight Column -->
+            <!-- Delete Village Column -->
             <ng-container matColumnDef="action_delete">
-                <mat-header-cell *matHeaderCellDef> User Id </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
+                <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <button class="mat-primary"
+                        mat-raised-button
+                        (click)="openAddVillageDialog()">Delete
+                    </button>
+                </mat-cell>
             </ng-container>
 
             <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>

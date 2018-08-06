@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Edit Village Info</h2>
+<form name="form"
+    (ngSubmit)="f.form.valid && onEditVillageSubmit()"
+    #f="ngForm"
+    novalidate>
+    <mat-dialog-content>
+
+        <mat-form-field class="example-full-width">
+            <input matInput
+                placeholder="Village Name"
+                name="villageName"
+                [(ngModel)]="editVillageInfo.newVillageName">
+            <!-- <mat-error *ngIf="villageNameFormControl.hasError('required')">
+                Village Name is
+                <strong>required</strong>
+            </mat-error> -->
+        </mat-form-field>
+
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <button type="submit"
+            class="mat-primary"
+            mat-raised-button>Update</button>
+    </mat-dialog-actions>
+</form>

@@ -6,4 +6,13 @@ Total no. of pages
 1. Login page
 2. Register page
 3. session storage
-4. 
+4. route guard
+5. loader
+6. component => Delete and Edit features
+inputs: {
+    list: [],
+    title: "",
+    sort: false,
+    view: false,
+    viewState: ""
+}

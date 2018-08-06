@@ -1,9 +1,12 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { MatSort, MatPaginator, MatTableDataSource } from '@angular/material';
 import { MatDialog } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
+
 import { HttpRequestServiceService } from '../services/http-request-service.service';
 
 import { AddVillageDialogComponent } from './add/add.village.dialog.component';
+import { EditVillageComponent } from './edit/edit.village.component';
 
 @Component({
   selector: 'app-village',
@@ -14,14 +17,15 @@ export class VillageComponent implements OnInit {
   httpRequestService: HttpRequestServiceService;
   villageList: any = new MatTableDataSource();
   villageMasterList: village[];
-  displayedColumns = ['village_id', 'village_name', 'user_id', 'action_edit', 'action_add', 'action_delete'];
+  displayedColumns = ['village_id', 'village_name', 'user_id', 'action_edit', 'action_delete'];
   addVillageName: any;
+  editVillageName: any;
   villageTotalCount: Number;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor(httpRequestService: HttpRequestServiceService, public dialog: MatDialog) {
+  constructor(httpRequestService: HttpRequestServiceService, public dialog: MatDialog, public snackBar: MatSnackBar) {
     this.httpRequestService = httpRequestService;
   }
 
@@ -46,6 +50,22 @@ export class VillageComponent implements OnInit {
     });
   }
 
+  openEditVillageDialog(oldVillageName) {
+    const dialogRef = this.dialog.open(EditVillageComponent, {
+      width: '250px',
+      data: { villageName: this.editVillageName, oldVillageName: oldVillageName }
+    });
+
+    dialogRef.afterClosed().subscribe(data => {
+      if (data['responseCode'] == 200) {
+        this.openSnackBar(data['responseMessage'], "SUCCESS");
+        this.getVillagesList();
+      } else {
+        this.openSnackBar(data['responseMessage'], "ERROR");
+      }
+    });
+  }
+
   getVillagesList() {
     this.httpRequestService.getAllVillages()
       .subscribe(data => {
@@ -61,28 +81,13 @@ export class VillageComponent implements OnInit {
       });
   }
 
-  /**
-   * add village to the list
-   */
-  addVillage() {
-    this.httpRequestService.addVillage({
-      mobileNo: '9941840511',
-      villageName: 'jangampalle123'
+  openSnackBar(message: string, action: string, ) {
+    this.snackBar.open(message, action, {
+      announcementMessage: "announce",
+      data: "data",
+      direction: "ltr",
+      duration: 2000
     })
-      .subscribe(data => {
-        if (data['responseCode'] == 200) {
-          this.villageMasterList.push({
-            village_id: '#',
-            village_name: 'jangampalle123',
-            user_id: 9
-          });
-          this.villageList = new MatTableDataSource(this.villageMasterList);
-        } else if (data['responseCode'] == 200) {
-          alert(data['responseMessage']);
-        }
-      }, error => {
-        console.error(JSON.stringify(error));
-      });
   }
 
 }

@@ -29,6 +29,7 @@ import { FarmersComponent } from './farmers/farmers.component';
 // village
 import { VillageComponent } from './village/village.component';
 import { AddVillageDialogComponent } from './village/add/add.village.dialog.component';
+import { EditVillageComponent } from './village/edit/edit.village.component';
 
 
 @NgModule({
@@ -37,7 +38,8 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
     LoginComponentComponent,
     FarmersComponent,
     VillageComponent,
-    AddVillageDialogComponent
+    AddVillageDialogComponent,
+    EditVillageComponent
   ],
   imports: [
     BrowserModule,
@@ -61,7 +63,8 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
     HttpClientModule,
   ],
   entryComponents: [
-    AddVillageDialogComponent
+    AddVillageDialogComponent,
+    EditVillageComponent
   ],
   exports: [
     BrowserAnimationsModule,
