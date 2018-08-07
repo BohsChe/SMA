@@ -105,6 +105,17 @@ export class HttpRequestServiceService {
   }
 
   /**
+   * delete a village info
+   */
+  deleteVillageInfo(villageInfo){
+    const options = { params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+      .set('villageId', villageInfo.village_id)
+    };
+    return this.httpClient.get(this.pageUrl + '/deleteVillage.php', options); 
+  }
+
+  /**
    * add a farmer
    */
   addFarmer(farmerInfo){

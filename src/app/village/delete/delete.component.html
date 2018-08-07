@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Add Village</h2>
+<mat-dialog-content>
+  Do you really want to delete this village {{ villageInfo.villageName }}?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button type="submit"
+    class="mat-primary"
+    (click)="onDeleteVillageSubmit()"
+    mat-raised-button>Ok</button>
+  <button type="submit"
+    class="mat-primary"
+    (click)="onNoClick()"
+    mat-raised-button>cancel</button>
+</mat-dialog-actions>

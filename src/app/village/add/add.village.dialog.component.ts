@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { HttpRequestServiceService } from '../../services/http-request-service.service';
 export interface AddVillageDialogData {
@@ -26,7 +27,8 @@ export class AddVillageDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<AddVillageDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: AddVillageDialogData,
-        HttpRequestServiceService: HttpRequestServiceService) {
+        HttpRequestServiceService: HttpRequestServiceService,
+        public snackBar: MatSnackBar) {
         this.httpRequestServiceService = HttpRequestServiceService;
     }
 
@@ -34,14 +36,26 @@ export class AddVillageDialogComponent {
         this.dialogRef.close();
     }
 
-    onLoginSubmit(): void {
+    onSubmit(): void {
         this.httpRequestServiceService.addVillage(this.addVillageInfo)
             .subscribe(data => {
                 if (data['responseCode'] == 200) {
-                    this.dialogRef.close();
+                    this.dialogRef.close(data);
+                    this.openSnackBar(data['responseMessage'], "SUCCESS");
+                } else {
+                    this.openSnackBar(data['responseMessage'], "ERROR");
                 }
             })
 
+    }
+
+    openSnackBar(message: string, action: string, ) {
+        this.snackBar.open(message, action, {
+            announcementMessage: "announce",
+            data: "data",
+            direction: "ltr",
+            duration: 2000
+        })
     }
 
 }

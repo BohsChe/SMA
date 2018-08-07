@@ -31,7 +31,7 @@ export class EditVillageComponent {
     HttpRequestServiceService: HttpRequestServiceService) {
       this.httpRequestServiceService = HttpRequestServiceService;
       this.editVillageInfo.oldVillageName = data.oldVillageName;
-      this.editVillageInfo.newVillageName = data.villageName;
+      this.editVillageInfo.newVillageName = data.oldVillageName;
   }
 
   onNoClick(): void {

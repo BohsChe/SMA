@@ -30,6 +30,7 @@ import { FarmersComponent } from './farmers/farmers.component';
 import { VillageComponent } from './village/village.component';
 import { AddVillageDialogComponent } from './village/add/add.village.dialog.component';
 import { EditVillageComponent } from './village/edit/edit.village.component';
+import { DeleteVillageDialogComponent } from './village/delete/delete.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { EditVillageComponent } from './village/edit/edit.village.component';
     FarmersComponent,
     VillageComponent,
     AddVillageDialogComponent,
-    EditVillageComponent
+    EditVillageComponent,
+    DeleteVillageDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +66,8 @@ import { EditVillageComponent } from './village/edit/edit.village.component';
   ],
   entryComponents: [
     AddVillageDialogComponent,
-    EditVillageComponent
+    EditVillageComponent,
+    DeleteVillageDialogComponent
   ],
   exports: [
     BrowserAnimationsModule,

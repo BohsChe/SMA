@@ -7,6 +7,7 @@ import { HttpRequestServiceService } from '../services/http-request-service.serv
 
 import { AddVillageDialogComponent } from './add/add.village.dialog.component';
 import { EditVillageComponent } from './edit/edit.village.component';
+import { DeleteVillageDialogComponent } from './delete/delete.component';
 
 @Component({
   selector: 'app-village',
@@ -37,6 +38,17 @@ export class VillageComponent implements OnInit {
 
   ngOnInit() {
     this.getVillagesList();
+  }
+
+  deleteVillageDialog(villageInfo) {
+    const dialogRef = this.dialog.open(DeleteVillageDialogComponent, {
+      width: '250px',
+      data: villageInfo
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getVillagesList();
+    });
   }
 
   openAddVillageDialog() {
@@ -77,7 +89,7 @@ export class VillageComponent implements OnInit {
           this.villageList.sort = this.sort;
         }
       }, error => {
-        console.error(JSON.stringify(error));
+        console.log(error);
       });
   }
 
