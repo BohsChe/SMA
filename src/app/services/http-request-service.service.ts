@@ -118,8 +118,18 @@ export class HttpRequestServiceService {
   /**
    * add a farmer
    */
-  addFarmer(farmerInfo){
-    return this.httpClient.get(this.pageUrl + '/addFarmer.php', farmerInfo);
+  addFarmer(farmerInfo, villageInfo){
+    const options = { params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+      .set('farmerName', farmerInfo.farmerName)
+      .set('milkType', villageInfo.milkType)
+      .set('gender', farmerInfo.gender)
+      .set('address', farmerInfo.address)
+      .set('fMobileNo', farmerInfo.fMobileNo)
+      .set('villageName', villageInfo.villageName)
+      .set('farmerNo', villageInfo.farmerNo)
+    };
+    return this.httpClient.get(this.pageUrl + '/addFarmer.php', options);
   }
 
   /**
@@ -135,7 +145,7 @@ export class HttpRequestServiceService {
   getFarmersByVillageName(villageInfo){
     // Add safe, URL encoded search parameter if there is a search term
     const options = { params: new HttpParams()
-      .set('mobileNo', villageInfo.mobileNo)
+      .set('mobileNo', this.userDetails.mobileNo)
       .set('villageName', villageInfo.villageName)
       .set('milkType', villageInfo.milkType)
     };

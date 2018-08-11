@@ -1,0 +1,53 @@
+<h2 mat-dialog-title>Add Farmer</h2>
+<form name="form"
+  (ngSubmit)="f.form.valid && onSubmit()"
+  #f="ngForm"
+  novalidate>
+  <mat-dialog-content>
+
+    <mat-form-field class="example-full-width">
+      <input matInput
+        placeholder="Farmer Name"
+        name="FarmerName"
+        [(ngModel)]="addFarmerInfo.farmerName">
+      <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
+            Farmer Name is
+            <strong>required</strong>
+        </mat-error> -->
+    </mat-form-field>
+    <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="addFarmerInfo.gender">
+      <mat-button-toggle value="M">
+        Male
+      </mat-button-toggle>
+      <mat-button-toggle value="F">
+        Female
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-form-field class="example-full-width">
+      <input matInput
+        placeholder="Address"
+        name="Address"
+        [(ngModel)]="addFarmerInfo.address">
+      <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
+        Farmer Name is
+        <strong>required</strong>
+    </mat-error> -->
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <input matInput
+        placeholder="Farmer mobile no."
+        name="fMobileNo"
+        [(ngModel)]="addFarmerInfo.fMobileNo">
+      <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
+      Farmer Name is
+      <strong>required</strong>
+  </mat-error> -->
+    </mat-form-field>
+
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button type="submit"
+      class="mat-primary"
+      mat-raised-button>Add</button>
+  </mat-dialog-actions>
+</form>

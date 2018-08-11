@@ -18,6 +18,8 @@ import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import { AppComponent } from './app.component';
@@ -31,6 +33,7 @@ import { VillageComponent } from './village/village.component';
 import { AddVillageDialogComponent } from './village/add/add.village.dialog.component';
 import { EditVillageComponent } from './village/edit/edit.village.component';
 import { DeleteVillageDialogComponent } from './village/delete/delete.component';
+import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
 
 
 @NgModule({
@@ -41,7 +44,8 @@ import { DeleteVillageDialogComponent } from './village/delete/delete.component'
     VillageComponent,
     AddVillageDialogComponent,
     EditVillageComponent,
-    DeleteVillageDialogComponent
+    DeleteVillageDialogComponent,
+    AddFarmerComponent
   ],
   imports: [
     BrowserModule,
@@ -61,13 +65,16 @@ import { DeleteVillageDialogComponent } from './village/delete/delete.component'
     MatPaginatorModule,
     MatDialogModule,
     MatSnackBarModule,
+    MatSelectModule,
+    MatButtonToggleModule,
     AppRoutingModule,
     HttpClientModule,
   ],
   entryComponents: [
     AddVillageDialogComponent,
     EditVillageComponent,
-    DeleteVillageDialogComponent
+    DeleteVillageDialogComponent,
+    AddFarmerComponent
   ],
   exports: [
     BrowserAnimationsModule,
@@ -81,7 +88,9 @@ import { DeleteVillageDialogComponent } from './village/delete/delete.component'
     MatTableModule,
     MatPaginatorModule,
     MatDialogModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatSelectModule,
+    MatButtonToggleModule
   ],
   providers: [HttpRequestServiceService,
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}

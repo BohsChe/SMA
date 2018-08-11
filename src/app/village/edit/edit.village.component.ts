@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { MatSnackBar } from '@angular/material';
 
 import { HttpRequestServiceService } from '../../services/http-request-service.service';
 export interface EditVillageDialogData {
@@ -28,10 +29,11 @@ export class EditVillageComponent {
   constructor(
     public dialogRef: MatDialogRef<EditVillageComponent>,
     @Inject(MAT_DIALOG_DATA) public data: EditVillageDialogData,
-    HttpRequestServiceService: HttpRequestServiceService) {
-      this.httpRequestServiceService = HttpRequestServiceService;
-      this.editVillageInfo.oldVillageName = data.oldVillageName;
-      this.editVillageInfo.newVillageName = data.oldVillageName;
+    HttpRequestServiceService: HttpRequestServiceService,
+    public snackBar: MatSnackBar) {
+    this.httpRequestServiceService = HttpRequestServiceService;
+    this.editVillageInfo.oldVillageName = data.oldVillageName;
+    this.editVillageInfo.newVillageName = data.oldVillageName;
   }
 
   onNoClick(): void {
@@ -42,9 +44,21 @@ export class EditVillageComponent {
     this.httpRequestServiceService.updateVillageInfo(this.editVillageInfo)
       .subscribe(data => {
         if (data['responseCode'] == 200) {
-          this.dialogRef.close( data );
+          this.dialogRef.close(data);
+          this.openSnackBar(data['responseMessage'], "SUCCESS");
+        } else {
+          this.openSnackBar(data['responseMessage'], "ERROR");
         }
       })
+  }
+
+  openSnackBar(message: string, action: string, ) {
+    this.snackBar.open(message, action, {
+      announcementMessage: "announce",
+      data: "data",
+      direction: "ltr",
+      duration: 2000
+    })
   }
 
 }

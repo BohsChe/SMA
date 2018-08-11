@@ -31,6 +31,7 @@ export class LoginComponentComponent implements OnInit {
   };
   public router: Router;
   private HttpRequestServiceService: HttpRequestServiceService;
+  // validation
   emailFormControl = new FormControl('', [
     Validators.required,
     Validators.email,

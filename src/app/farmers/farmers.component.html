@@ -1,42 +1,64 @@
+<mat-form-field>
+  <mat-select placeholder="Select milkType"
+    [(value)]="farmerListQuery.milkType">
+    <mat-option *ngFor="let milkType of milkTypes"
+      [value]="milkType">
+      {{milkType}}
+    </mat-option>
+  </mat-select>
+</mat-form-field>
+<button class="mat-primary"
+  mat-raised-button
+  (click)="openAddFarmerDialog()">Add farmer
+</button>
 <div class="pagination-container mat-elevation-z8">
   <div class="pagination-header">
     <mat-form-field>
-      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      <input matInput
+        (keyup)="applyFilter($event.target.value)"
+        placeholder="Filter">
     </mat-form-field>
   </div>
 
-  <mat-table #table [dataSource]="dataSource">
+  <mat-table #table
+    [dataSource]="dataSource">
 
     <!-- Position Column -->
-    <ng-container matColumnDef="position">
-      <mat-header-cell *matHeaderCellDef> No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.position}} </mat-cell>
+    <ng-container matColumnDef="farmer_name">
+      <mat-header-cell *matHeaderCellDef> Farmer Name </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.farmer_name}} </mat-cell>
     </ng-container>
 
     <!-- Name Column -->
-    <ng-container matColumnDef="name">
-      <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    <ng-container matColumnDef="gender">
+      <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
     </ng-container>
 
     <!-- Weight Column -->
-    <ng-container matColumnDef="weight">
-      <mat-header-cell *matHeaderCellDef> Weight </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.weight}} </mat-cell>
+    <ng-container matColumnDef="address">
+      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
     </ng-container>
 
     <!-- Symbol Column -->
-    <ng-container matColumnDef="symbol">
-      <mat-header-cell *matHeaderCellDef> Symbol </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.symbol}} </mat-cell>
+    <ng-container matColumnDef="mobile_no">
+      <mat-header-cell *matHeaderCellDef> Mobile No. </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.mobile_no}} </mat-cell>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="milk_type">
+      <mat-header-cell *matHeaderCellDef> Milk Type </mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.milk_type}} </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
   <mat-paginator #paginator
-                 [pageSize]="10"
-                 [pageSizeOptions]="[5, 10, 20]"
-                 [showFirstLastButtons]="true">
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 20]"
+    [showFirstLastButtons]="true">
   </mat-paginator>
 </div>

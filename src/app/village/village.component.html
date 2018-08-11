@@ -22,27 +22,24 @@
             matSort
             [dataSource]="villageList">
 
-            <!-- Position Column -->
+            <!-- Id Column -->
             <ng-container matColumnDef="village_id">
-                <mat-header-cell *matHeaderCellDef  mat-sort-header>Village Id </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef
+                    mat-sort-header>Village Id </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.village_id}} </mat-cell>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="village_name">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> Village Name </mat-header-cell>
+                <mat-header-cell *matHeaderCellDef
+                    mat-sort-header> Village Name </mat-header-cell>
                 <mat-cell *matCellDef="let element"> {{element.village_name}} </mat-cell>
-            </ng-container>
-
-            <!-- Weight Column -->
-            <ng-container matColumnDef="user_id">
-                <mat-header-cell *matHeaderCellDef mat-sort-header> User Id </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.user_id}} </mat-cell>
             </ng-container>
 
             <!-- Edit Village Column -->
             <ng-container matColumnDef="action_edit">
-                <mat-header-cell *matHeaderCellDef mat-sort-header>Edit</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef
+                    mat-sort-header></mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <button class="mat-primary"
                         mat-raised-button
@@ -53,12 +50,23 @@
 
             <!-- Delete Village Column -->
             <ng-container matColumnDef="action_delete">
-                <mat-header-cell *matHeaderCellDef>Delete</mat-header-cell>
+                <mat-header-cell *matHeaderCellDef></mat-header-cell>
                 <mat-cell *matCellDef="let element">
                     <button class="mat-primary"
                         mat-raised-button
                         (click)="deleteVillageDialog(element)">Delete
                     </button>
+                </mat-cell>
+            </ng-container>
+
+            <!-- View farmers Column -->
+            <ng-container matColumnDef="view_farmers">
+                <mat-header-cell *matHeaderCellDef
+                    mat-sort-header></mat-header-cell>
+                <mat-cell *matCellDef="let element">
+                    <a routerLink="/farmers"
+                        [queryParams]="{ villageId: element.village_id, villageName: element.village_name}"
+                        mat-stroked-button>View farmers</a>
                 </mat-cell>
             </ng-container>
 

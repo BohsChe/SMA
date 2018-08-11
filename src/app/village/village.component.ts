@@ -18,7 +18,7 @@ export class VillageComponent implements OnInit {
   httpRequestService: HttpRequestServiceService;
   villageList: any = new MatTableDataSource();
   villageMasterList: village[];
-  displayedColumns = ['village_id', 'village_name', 'user_id', 'action_edit', 'action_delete'];
+  displayedColumns = ['village_id', 'village_name', 'action_edit', 'action_delete', 'view_farmers'];
   addVillageName: any;
   editVillageName: any;
   villageTotalCount: Number;
