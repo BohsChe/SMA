@@ -25,6 +25,8 @@ import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material
 import { AppComponent } from './app.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { HttpRequestServiceService } from './services/http-request-service.service';
+import { AuthService } from './auth/auth.service';
+import { AuthGuard } from './auth/auth.guard';
 import { AppRoutingModule } from './/app-routing.module';
 import { FarmersComponent } from './farmers/farmers.component';
 
@@ -34,6 +36,8 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
 import { EditVillageComponent } from './village/edit/edit.village.component';
 import { DeleteVillageDialogComponent } from './village/delete/delete.component';
 import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
+import { EditFarmerComponent } from './edit-farmer/edit-farmer.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -45,7 +49,9 @@ import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
     AddVillageDialogComponent,
     EditVillageComponent,
     DeleteVillageDialogComponent,
-    AddFarmerComponent
+    AddFarmerComponent,
+    EditFarmerComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
@@ -92,7 +98,10 @@ import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
     MatSelectModule,
     MatButtonToggleModule
   ],
-  providers: [HttpRequestServiceService,
+  providers: [
+    HttpRequestServiceService,
+    AuthService,
+    AuthGuard,
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ],
   bootstrap: [AppComponent]
