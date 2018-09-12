@@ -1,3 +1,9 @@
 app-farmers .pagination-container{
     padding: 10px;
 }
+#farmerFilterWrapper{
+    max-width: 250px;
+}
+#milkTypeWrapper{
+    max-width: 200px;
+}

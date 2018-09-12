@@ -38,6 +38,7 @@ import { DeleteVillageDialogComponent } from './village/delete/delete.component'
 import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
 import { EditFarmerComponent } from './edit-farmer/edit-farmer.component';
 import { HeaderComponent } from './header/header.component';
+import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { HeaderComponent } from './header/header.component';
     DeleteVillageDialogComponent,
     AddFarmerComponent,
     EditFarmerComponent,
-    HeaderComponent
+    HeaderComponent,
+    AuthLayoutComponent
   ],
   imports: [
     BrowserModule,

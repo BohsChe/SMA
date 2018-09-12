@@ -6,15 +6,47 @@
     <mat-tab-group>
       <mat-tab label="Login">
         <div class="login-form-card">
+          <form [formGroup]="form"
+            (ngSubmit)="onLoginSubmit()">
+            <p>Please login to continue</p>
+            <mat-form-field class="full-width-input">
+              <input matInput
+                placeholder="Mobile Number"
+                formControlName="mobileNo"
+                [(ngModel)]="loginModel.mobileNo"
+                required>
+              <mat-error *ngIf="isFieldInvalid('mobileNo')">
+                Please inform your user name
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field class="full-width-input">
+              <input matInput
+                type="password"
+                placeholder="Password"
+                formControlName="password"
+                [(ngModel)]="loginModel.password"
+                required>
+              <mat-error *ngIf="isFieldInvalid('password')">
+                Please inform your password
+              </mat-error>
+            </mat-form-field>
+            <button mat-raised-button
+              color="primary">Login</button>
+          </form>
+        </div>
+      </mat-tab>
+      <mat-tab label="Register">
+        <div class="login-form-card">
           <form name="form"
-            (ngSubmit)="f.form.valid && onLoginSubmit()"
-            #f="ngForm"
+            (ngSubmit)="rf.form.valid && onRegisterSubmit()"
+            #rf="ngForm"
             novalidate>
             <mat-form-field class="example-full-width">
               <input matInput
-                placeholder="Enter your Mobile Number"
-                name="loginMobileNo"
-                [(ngModel)]="loginModel.mobileNo"
+                placeholder="Enter your mobile number"
+                value=""
+                name="email"
+                [(ngModel)]="registerModel.mobileNo"
                 [formControl]="phoneFormControl"
                 [errorStateMatcher]="matcher">
               <mat-error *ngIf="(phoneFormControl.hasError('minLength') || phoneFormControl.hasError('maxLength') )&& !phoneFormControl.hasError('required')">
@@ -27,65 +59,22 @@
               </mat-error>
             </mat-form-field>
             <mat-form-field class="example-full-width">
-              <input placeholder="Password"
+              <input type="password"
                 matInput
-                type="password"
-                name="loginPassword"
-                [(ngModel)]="loginModel.password"
-                [formControl]="passwordFormControl"
-                [errorStateMatcher]="matcher">
-              <mat-error *ngIf="passwordFormControl.hasError('required')">
-                password is
-                <strong>mandatory</strong>
-              </mat-error>
+                placeholder="Password"
+                value=""
+                name="password"
+                [(ngModel)]="registerModel.password"
+                #password="ngModel"
+                [ngClass]="{ 'is-invalid': rf.submitted && password.invalid }"
+                required
+                minlength="6">
             </mat-form-field>
-
-            <button type="submit"
-              class="mat-primary"
-              mat-raised-button>Login</button>
-          </form>
-        </div>
-      </mat-tab>
-      <mat-tab label="Register">
-        <div class="login-form-card">
-          <form name="form"
-            (ngSubmit)="rf.form.valid && onRegisterSubmit()"
-            #rf="ngForm"
-            novalidate>
-              <mat-form-field class="example-full-width">
-                <input matInput
-                  placeholder="Enter your mobile number"
-                  value=""
-                  name="email"
-                  [(ngModel)]="registerModel.mobileNo"
-                  [formControl]="phoneFormControl"
-                  [errorStateMatcher]="matcher">
-                <mat-error *ngIf="(phoneFormControl.hasError('minLength') || phoneFormControl.hasError('maxLength') )&& !phoneFormControl.hasError('required')">
-                  Mobile number should be
-                  <strong>10 digits</strong>
-                </mat-error>
-                <mat-error *ngIf="phoneFormControl.hasError('required')">
-                  Mobile number is
-                  <strong>required</strong>
-                </mat-error>
-              </mat-form-field>
-              <mat-form-field class="example-full-width">
-                <input type="password"
-                  matInput
-                  placeholder="Password"
-                  value=""
-                  name="password"
-                  [(ngModel)]="registerModel.password"
-                  #password="ngModel"
-                  [ngClass]="{ 'is-invalid': rf.submitted && password.invalid }"
-                  required
-                  minlength="6">
-              </mat-form-field>
-              <mat-error *ngIf="rf.submitted && password.invalid"
-                class="invalid-feedback">
-                <div *ngIf="password.errors.required">Password is required</div>
-                <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
-              </mat-error>
+            <mat-error *ngIf="rf.submitted && password.invalid"
+              class="invalid-feedback">
+              <div *ngIf="password.errors.required">Password is required</div>
+              <div *ngIf="password.errors.minlength">Password must be at least 6 characters</div>
+            </mat-error>
             <button type="submit"
               class="mat-primary"
               mat-raised-button>Register

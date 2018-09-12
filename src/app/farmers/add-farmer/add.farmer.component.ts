@@ -7,6 +7,7 @@ import { HttpRequestServiceService } from '../../services/http-request-service.s
 export interface AddFarmerDialogData {
   milkType: string;
   villageName: string;
+  farmerNo: string;
 }
 
 @Component({
@@ -27,6 +28,7 @@ export class AddFarmerComponent{
   }
 
   onSubmit() {
+    this.addFarmerInfo.farmerNo = this.villageInfo.farmerNo;
     this.HttpRequestService.addFarmer(this.addFarmerInfo, this.villageInfo)
       .subscribe(data => {
         if (data['responseCode'] == 200) {
@@ -49,4 +51,11 @@ export class AddFarmerComponent{
     })
   }
 
+}
+
+export interface FarmerInfoModel{
+  farmerName: string;
+  gender: string;
+  address: string;
+  fMobileNo: string;
 }
