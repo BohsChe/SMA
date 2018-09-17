@@ -4,11 +4,8 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { MatSnackBar } from '@angular/material';
 
 import { HttpRequestServiceService } from '../../services/http-request-service.service';
-export interface AddFarmerDialogData {
-  milkType: string;
-  villageName: string;
-  farmerNo: string;
-}
+import { AddFarmerFormData, AddFarmerDialogData, FarmerTableRowData} from './../../Models/farmer';
+
 
 @Component({
   selector: 'app-add-farmer',
@@ -16,20 +13,22 @@ export interface AddFarmerDialogData {
   styleUrls: ['./add.farmer.component.css']
 })
 export class AddFarmerComponent{
-  addFarmerInfo: any = {};
-  villageInfo: AddFarmerDialogData;
+  milkTypes: string[] = ['A', 'B', 'C'];
+
+  farmerDialogData: AddFarmerDialogData;
   HttpRequestService: HttpRequestServiceService;
   constructor(private HttpRequestServiceService: HttpRequestServiceService,
     public dialogRef: MatDialogRef<AddFarmerComponent>,
     public snackBar: MatSnackBar,
     @Inject(MAT_DIALOG_DATA) public data: AddFarmerDialogData  ) {
     this.HttpRequestService = HttpRequestServiceService;
-    this.villageInfo = data;
+    this.farmerDialogData = data;
+    console.log( JSON.stringify(data) );
   }
 
   onSubmit() {
-    this.addFarmerInfo.farmerNo = this.villageInfo.farmerNo;
-    this.HttpRequestService.addFarmer(this.addFarmerInfo, this.villageInfo)
+    // this.addFarmerInfo.farmerNo = this.villageInfo.farmerNo;
+    this.HttpRequestService.addFarmer(this.farmerDialogData)
       .subscribe(data => {
         if (data['responseCode'] == 200) {
           this.dialogRef.close(data);

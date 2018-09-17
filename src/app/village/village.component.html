@@ -1,11 +1,13 @@
-<mat-toolbar color="primary"></mat-toolbar>
+<app-header></app-header>
 <mat-card>
-    <div class="pagination-container mat-elevation-z8">
+    <div class="pagination-container mat-elevation-z8" id="village-pagination-container">
         <section class="mat-typography">
-            <h1 class="title">{{ 'Villages (' + villageTotalCount + ')' }}</h1>
             <div class="pagination-header"
                 fxLayout="row"
                 fxLayoutAlign="start center">
+                <div fxFlex="300px">
+                    <h1 class="title">{{ 'Villages (' + villageTotalCount + ')' }}</h1>
+                </div>
                 <mat-form-field fxFlexOffset="15px">
                     <input matInput
                         (keyup)="applyFilter($event.target.value)"

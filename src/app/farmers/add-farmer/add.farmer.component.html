@@ -4,18 +4,18 @@
   #f="ngForm"
   novalidate>
   <mat-dialog-content>
-
+    {{ farmerDialogData .farmerNo }}
     <mat-form-field class="example-full-width">
       <input matInput
         placeholder="Farmer Name"
         name="FarmerName"
-        [(ngModel)]="addFarmerInfo.farmerName">
+        [(ngModel)]="farmerDialogData.farmerFormData.farmerName">
       <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
             Farmer Name is
             <strong>required</strong>
         </mat-error> -->
     </mat-form-field>
-    <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="addFarmerInfo.gender">
+    <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="farmerDialogData.farmerFormData.gender">
       <mat-button-toggle value="M">
         Male
       </mat-button-toggle>
@@ -27,7 +27,7 @@
       <input matInput
         placeholder="Address"
         name="Address"
-        [(ngModel)]="addFarmerInfo.address">
+        [(ngModel)]="farmerDialogData.farmerFormData.address">
       <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
         Farmer Name is
         <strong>required</strong>
@@ -37,13 +37,23 @@
       <input matInput
         placeholder="Farmer mobile no."
         name="fMobileNo"
-        [(ngModel)]="addFarmerInfo.fMobileNo">
+        [(ngModel)]="farmerDialogData.farmerFormData.fMobileNo">
       <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
       Farmer Name is
       <strong>required</strong>
   </mat-error> -->
     </mat-form-field>
-
+    <mat-form-field>
+      <mat-select placeholder="Select milkType"
+          [(ngModel)]="farmerDialogData.farmerFormData.milkType"
+          name="milkType"
+          [(value)]="farmerDialogData.farmerFormData.milkType">
+          <mat-option *ngFor="let milkType of milkTypes"
+            [value]="milkType">
+            {{milkType}}
+          </mat-option>
+        </mat-select>
+    </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
     <button type="submit"

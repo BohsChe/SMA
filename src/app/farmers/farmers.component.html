@@ -1,94 +1,108 @@
-<div class="pagination-container mat-elevation-z8">
-  <div class="pagination-header"
-    fxLayout="row" fxLayoutGap="10px" fxLayoutAlign="end center">
-    <div fxFlex>
-      <h2>Farmers</h2>
-    </div>
-    <mat-form-field fxFlex id="farmerFilterWrapper">
-      <input matInput
-        (keyup)="applyFilter($event.target.value)"
-        [(ngModel)]="farmerFilterQuery"
-        (ngModelChange)="doSomething($event)"
-        placeholder="Filter">
-    </mat-form-field>
-    <mat-form-field fxFlex id="milkTypeWrapper">
-      <mat-select placeholder="Select milkType"
-        [(value)]="farmerListQuery.milkType">
-        <mat-option *ngFor="let milkType of milkTypes"
-          [value]="milkType">
-          {{milkType}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <div fxFlex="130px">
-      <button class="mat-primary"
-        mat-raised-button
-        (click)="openAddFarmerDialog()">Add farmer
-      </button>
-    </div>
+<app-header></app-header>
+<mat-card>
+  <div class="pagination-container mat-elevation-z8">
+    <!-- Farmer filter section starts -->
+    <div class="pagination-header"
+      fxLayout="row"
+      fxLayoutGap="10px"
+      fxLayoutAlign="end center">
+      <div fxFlex>
+        <h2 class="title">Farmers</h2>
+      </div>
+      <mat-form-field fxFlex="200px"
+        id="farmerFilterWrapper">
+        <input matInput
+          (keyup)="applyFilter($event.target.value)"
+          [(ngModel)]="farmerFilterQuery"
+          (ngModelChange)="doSomething($event)"
+          placeholder="Filter">
+      </mat-form-field>
+      <mat-form-field fxFlex
+        id="milkTypeWrapper">
+        <mat-select placeholder="Select milkType"
+          (ngModelChange)="getFarmerList()"
+          [(ngModel)]="farmerListQuery.milkType"
+          [(value)]="farmerListQuery.milkType">
+          <mat-option *ngFor="let milkType of milkTypes"
+            [value]="milkType">
+            {{milkType}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxFlex="130px">
+        <button class="mat-primary"
+          mat-raised-button
+          (click)="openAddFarmerDialog()">Add farmer
+        </button>
+      </div>
 
+    </div>
+    <!-- Farmer filter section ends -->
+
+    <mat-table #table
+      [dataSource]="FarmerTabledataSource">
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="farmer_name">
+        <mat-header-cell *matHeaderCellDef> Farmer Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.farmer_name}} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="gender">
+        <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="address">
+        <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="mobile_no">
+        <mat-header-cell *matHeaderCellDef> Mobile No. </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.mobile_no}} </mat-cell>
+      </ng-container>
+
+      <!-- Symbol Column -->
+      <ng-container matColumnDef="milk_type">
+        <mat-header-cell *matHeaderCellDef> Milk Type </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.milk_type}} </mat-cell>
+      </ng-container>
+
+      <!-- Edit Column -->
+      <ng-container matColumnDef="farmer_edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button class="mat-primary"
+            mat-raised-button
+            (click)="openEditFarmerDialog(element)">Edit
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="farmer_delete">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button class="mat-primary"
+            mat-raised-button
+            (click)="openDeleteFarmerDialog(element.village_name)">Delete
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row> No farmers found.</mat-row>
+
+    </mat-table>
+    <mat-paginator #paginator
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true">
+    </mat-paginator>
   </div>
-  <mat-table #table
-    [dataSource]="FarmerTabledataSource">
-
-    <!-- Position Column -->
-    <ng-container matColumnDef="farmer_name">
-      <mat-header-cell *matHeaderCellDef> Farmer Name </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.farmer_name}} </mat-cell>
-    </ng-container>
-
-    <!-- Name Column -->
-    <ng-container matColumnDef="gender">
-      <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.gender}} </mat-cell>
-    </ng-container>
-
-    <!-- Weight Column -->
-    <ng-container matColumnDef="address">
-      <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.address}} </mat-cell>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="mobile_no">
-      <mat-header-cell *matHeaderCellDef> Mobile No. </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.mobile_no}} </mat-cell>
-    </ng-container>
-
-    <!-- Symbol Column -->
-    <ng-container matColumnDef="milk_type">
-      <mat-header-cell *matHeaderCellDef> Milk Type </mat-header-cell>
-      <mat-cell *matCellDef="let element"> {{element.milk_type}} </mat-cell>
-    </ng-container>
-
-    <!-- Edit Column -->
-    <ng-container matColumnDef="farmer_edit">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <button class="mat-primary"
-          mat-raised-button
-          (click)="openEditFarmerDialog(element.village_name)">Edit
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <!-- Delete Column -->
-    <ng-container matColumnDef="farmer_delete">
-      <mat-header-cell *matHeaderCellDef></mat-header-cell>
-      <mat-cell *matCellDef="let element">
-        <button class="mat-primary"
-          mat-raised-button
-          (click)="openDeleteFarmerDialog(element.village_name)">Delete
-        </button>
-      </mat-cell>
-    </ng-container>
-
-    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-  </mat-table>
-  <mat-paginator #paginator
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 20]"
-    [showFirstLastButtons]="true">
-  </mat-paginator>
-</div>
+</mat-card>

@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserAuthInfo, VillageModel } from '../Models/user-auth-info';
 import { environment } from '../../environments/environment';
+import { AddFarmerDialogData } from '../Models/farmer';
 
 @Injectable()
 export class HttpRequestServiceService {
@@ -118,16 +119,16 @@ export class HttpRequestServiceService {
   /**
    * add a farmer
    */
-  addFarmer(farmerInfo, villageInfo){
+  addFarmer(farmerDialogData: AddFarmerDialogData){
     const options = { params: new HttpParams()
-      .set('mobileNo', this.userDetails.mobileNo)
-      .set('farmerName', farmerInfo.farmerName)
-      .set('milkType', villageInfo.milkType)
-      .set('gender', farmerInfo.gender)
-      .set('address', farmerInfo.address)
-      .set('fMobileNo', farmerInfo.fMobileNo)
-      .set('villageName', villageInfo.villageName)
-      .set('farmerNo', villageInfo.farmerNo)
+      .set('mobileNo', farmerDialogData.farmerFormData.fMobileNo )
+      .set('farmerName', farmerDialogData.farmerFormData.farmerName)
+      .set('milkType', farmerDialogData.farmerFormData.milkType)
+      .set('gender', farmerDialogData.farmerFormData.gender)
+      .set('address', farmerDialogData.farmerFormData.address)
+      .set('fMobileNo', farmerDialogData.farmerFormData.fMobileNo)
+      .set('villageName', farmerDialogData.villageName)
+      .set('farmerNo', farmerDialogData.farmerNo)
     };
     return this.httpClient.get(this.pageUrl + '/addFarmer.php', options);
   }

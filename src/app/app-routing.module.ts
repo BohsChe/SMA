@@ -8,8 +8,7 @@ import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponentComponent },
-  { path: 'login', component: HeaderComponent },
-  { path: 'farmers', component: FarmersComponent },
+  { path: 'farmers', component: FarmersComponent, canActivate: [AuthGuard] },
   { path: 'villages', component: VillageComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];

@@ -1,3 +1,14 @@
+html{
+    background-color: #eee;
+    height: 100%;
+}
+mat-card{
+    background-color: #eee;
+}
+mat-card .title{
+    text-align: left;
+    padding-left: 25px;
+}
 body{
     margin: 0px;
 }
@@ -15,7 +26,7 @@ body{
     margin: 10px 0px;
 }
 
-.mat-raised-button:not([class*=mat-elevation-z]){
+/* .mat-raised-button:not([class*=mat-elevation-z]){
     background: rgba(143,153,153,1);
     background: -moz-linear-gradient(left, rgba(143,153,153,1) 0%, rgba(38,64,89,1) 100%);
     background: -webkit-gradient(left top, right top, color-stop(0%, rgba(143,153,153,1)), color-stop(100%, rgba(38,64,89,1)));
@@ -26,4 +37,4 @@ body{
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8f9999', endColorstr='#264059', GradientType=1 );
     text-transform: uppercase;
     font-weight: 600;
-}
+} */

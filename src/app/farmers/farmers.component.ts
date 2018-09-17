@@ -2,10 +2,13 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSelect } from '@angular/material';
 import { MatDialog } from '@angular/material';
-
+// custom services
 import { HttpRequestServiceService } from '../services/http-request-service.service';
+// Dialog component
+import { AddFarmerComponent } from './add-farmer/add.farmer.component';
+// Models
+import { AddFarmerFormData, AddFarmerDialogData, FarmerTableRowData, FarmerFilterQuery} from './../Models/farmer';
 
-import { AddFarmerComponent,FarmerInfoModel } from './add-farmer/add.farmer.component';
 @Component({
   selector: 'app-farmers',
   templateUrl: './farmers.component.html',
@@ -15,14 +18,17 @@ export class FarmersComponent implements OnInit {
   // Data table columns init
   displayedColumns = ['farmer_name', 'gender', 'address', 'mobile_no', 'milk_type', 'farmer_edit', 'farmer_delete'];
   FarmerTabledataSource = new MatTableDataSource();
-
+  // to handle ajax calls
   httpRequestService: HttpRequestServiceService;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  // initialize Models
   milkTypes: string[] = ['A', 'B', 'C'];
-  EditFarmerInfoModel: FarmerInfoModel;
-  farmerListQuery: any = {
+  // EditFarmerInfoModel: FarmerInfoModel;
+  farmerListQuery: FarmerFilterQuery = {
     milkType: 'C',
-    villageName: ''
+    villageName: '',
+    villageId: '',
+    farmerNo: ''
   }
 
   applyFilter(filterValue: string) {
@@ -53,7 +59,8 @@ export class FarmersComponent implements OnInit {
           this.FarmerTabledataSource = new MatTableDataSource(data['data']);
           this.farmerListQuery.farmerNo = data['data'].length+1;
         }else{
-          this.farmerListQuery.farmerNo = 1;
+          // this.farmerListQuery.farmerNo = this.farmerListQuery.milkType+1;
+          this.FarmerTabledataSource = new MatTableDataSource();
         }
       }, error => {
         console.error(JSON.stringify(error));
@@ -71,10 +78,26 @@ export class FarmersComponent implements OnInit {
     });
   }
 
-  openEditFarmerDialog() {
+  openEditFarmerDialog( farmerRowData: FarmerTableRowData ) {
+    // Form model for Add/Edit Farmer dialog data
+    let farmerListQuery:FarmerFilterQuery = this.farmerListQuery;
+    let farmerFormData: AddFarmerFormData = {
+      address: farmerRowData.address,
+      farmerName: farmerRowData.farmer_name,
+      fMobileNo: farmerRowData.mobile_no,
+      gender: farmerRowData.gender,
+      milkType: farmerRowData.milk_type
+    }
+    let farmerDialogData: AddFarmerDialogData = {
+      farmerFormData: farmerFormData,
+      farmerNo: this.farmerListQuery.farmerNo,
+      milkType: this.farmerListQuery.milkType,
+      villageName: this.farmerListQuery.villageName
+    }
+
     const dialogRef = this.dialog.open(AddFarmerComponent, {
       width: '300px',
-      data: this.farmerListQuery
+      data: farmerDialogData
     });
 
     dialogRef.afterClosed().subscribe(result => {
