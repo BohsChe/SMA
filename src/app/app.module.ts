@@ -20,6 +20,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MAT_DIALOG_DATA } from '@angular/material';
 
 import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
 import { EditFarmerComponent } from './edit-farmer/edit-farmer.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
+import { DeleteFarmerComponent } from './farmers/delete-farmer/delete-farmer.component';
 
 
 @NgModule({
@@ -53,7 +55,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     AddFarmerComponent,
     EditFarmerComponent,
     HeaderComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    DeleteFarmerComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +85,8 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     AddVillageDialogComponent,
     EditVillageComponent,
     DeleteVillageDialogComponent,
-    AddFarmerComponent
+    AddFarmerComponent,
+    DeleteFarmerComponent
   ],
   exports: [
     BrowserAnimationsModule,
@@ -104,6 +108,7 @@ import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component
     HttpRequestServiceService,
     AuthService,
     AuthGuard,
+    {provide: MAT_DIALOG_DATA, useValue: {} },
     {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
   ],
   bootstrap: [AppComponent]

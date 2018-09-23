@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { HttpRequestServiceService } from '../services/http-request-service.service';
 // Dialog component
 import { AddFarmerComponent } from './add-farmer/add.farmer.component';
+import { DeleteFarmerComponent } from './delete-farmer/delete-farmer.component';
 // Models
 import { AddFarmerFormData, AddFarmerDialogData, FarmerTableRowData, FarmerFilterQuery} from './../Models/farmer';
 
@@ -30,6 +31,7 @@ export class FarmersComponent implements OnInit {
     villageId: '',
     farmerNo: ''
   }
+  farmerTotalCount: number;
 
   applyFilter(filterValue: string) {
     filterValue = filterValue.trim(); // Remove whitespace
@@ -58,10 +60,13 @@ export class FarmersComponent implements OnInit {
         if (data['responseCode'] == 200) {
           this.FarmerTabledataSource = new MatTableDataSource(data['data']);
           this.farmerListQuery.farmerNo = data['data'].length+1;
+          this.farmerTotalCount = data['data'].length;
+          this.FarmerTabledataSource.paginator = this.paginator;
         }else{
           // this.farmerListQuery.farmerNo = this.farmerListQuery.milkType+1;
           this.FarmerTabledataSource = new MatTableDataSource();
         }
+
       }, error => {
         console.error(JSON.stringify(error));
       });
@@ -90,7 +95,7 @@ export class FarmersComponent implements OnInit {
     }
     let farmerDialogData: AddFarmerDialogData = {
       farmerFormData: farmerFormData,
-      farmerNo: this.farmerListQuery.farmerNo,
+      farmerNo: farmerRowData.farmer_no,
       milkType: this.farmerListQuery.milkType,
       villageName: this.farmerListQuery.villageName
     }
@@ -105,10 +110,10 @@ export class FarmersComponent implements OnInit {
     });
   }
 
-  openDeleteFarmerDialog() {
-    const dialogRef = this.dialog.open(AddFarmerComponent, {
+  openDeleteFarmerDialog( farmerRowData: FarmerTableRowData ) {
+    const dialogRef = this.dialog.open(DeleteFarmerComponent, {
       width: '300px',
-      data: this.farmerListQuery
+      data: farmerRowData
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -116,11 +121,4 @@ export class FarmersComponent implements OnInit {
     });
   }
 
-}
-
-export interface Element {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
 }

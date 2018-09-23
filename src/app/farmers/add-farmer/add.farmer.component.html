@@ -1,10 +1,9 @@
-<h2 mat-dialog-title>Add Farmer</h2>
+<h2 mat-dialog-title>{{ dialogTitle }}</h2>
 <form name="form"
   (ngSubmit)="f.form.valid && onSubmit()"
   #f="ngForm"
   novalidate>
   <mat-dialog-content>
-    {{ farmerDialogData .farmerNo }}
     <mat-form-field class="example-full-width">
       <input matInput
         placeholder="Farmer Name"
@@ -58,6 +57,6 @@
   <mat-dialog-actions>
     <button type="submit"
       class="mat-primary"
-      mat-raised-button>Add</button>
+      mat-raised-button>{{ dialogBtnText }}</button>
   </mat-dialog-actions>
 </form>

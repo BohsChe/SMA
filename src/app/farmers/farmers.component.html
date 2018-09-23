@@ -7,7 +7,7 @@
       fxLayoutGap="10px"
       fxLayoutAlign="end center">
       <div fxFlex>
-        <h2 class="title">Farmers</h2>
+        <h2 class="title">Farmers({{ farmerTotalCount }})</h2>
       </div>
       <mat-form-field fxFlex="200px"
         id="farmerFilterWrapper">
@@ -89,7 +89,7 @@
         <mat-cell *matCellDef="let element">
           <button class="mat-primary"
             mat-raised-button
-            (click)="openDeleteFarmerDialog(element.village_name)">Delete
+            (click)="openDeleteFarmerDialog(element)">Delete
           </button>
         </mat-cell>
       </ng-container>

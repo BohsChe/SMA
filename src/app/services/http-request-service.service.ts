@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { UserAuthInfo, VillageModel } from '../Models/user-auth-info';
 import { environment } from '../../environments/environment';
-import { AddFarmerDialogData } from '../Models/farmer';
+import { AddFarmerDialogData, UpdateFarmerApiData, FarmerTableRowData } from '../Models/farmer';
 
 @Injectable()
 export class HttpRequestServiceService {
@@ -121,7 +121,7 @@ export class HttpRequestServiceService {
    */
   addFarmer(farmerDialogData: AddFarmerDialogData){
     const options = { params: new HttpParams()
-      .set('mobileNo', farmerDialogData.farmerFormData.fMobileNo )
+      .set('mobileNo', this.userDetails.mobileNo )
       .set('farmerName', farmerDialogData.farmerFormData.farmerName)
       .set('milkType', farmerDialogData.farmerFormData.milkType)
       .set('gender', farmerDialogData.farmerFormData.gender)
@@ -156,8 +156,25 @@ export class HttpRequestServiceService {
   /**
    * update farmer info
    */
-  updateFarmerInfo(farmerInfo){
-    return this.httpClient.get(this.pageUrl + '/updateFarmer.php', farmerInfo);
+  updateFarmerInfo(farmerInfo: UpdateFarmerApiData){
+    farmerInfo.mobileNo = this.userDetails.mobileNo;
+    return this.httpClient.get(this.pageUrl + '/updateFarmer.php', {
+      params: Object.entries(farmerInfo).reduce(
+          (params, [key, value]) => params.set(key, value), new HttpParams())
+      });
+  }
+
+  /**
+   * delete farmer info
+   */
+  deleteFarmerInfo(farmerInfo: FarmerTableRowData){
+    // Add safe, URL encoded search parameter if there is a search term
+    const options = { params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+      .set('farmerId', farmerInfo.farmer_id)
+      .set('villageId', farmerInfo.village_id)
+    };
+    return this.httpClient.get(this.pageUrl + '/updateFarmer.php', options);
   }
 
   /**

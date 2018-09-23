@@ -1,6 +1,15 @@
 <mat-toolbar color="primary">  
   <mat-toolbar-row>
     <span>{{title}}</span>
+    <span class="spacer"></span>
+    <ul class="nav-right">
+      <li>
+        <a [routerLink]="['/villages']" mat-button id="villages">
+          Villages
+        </a>
+      </li>
+    </ul>
+    
   </mat-toolbar-row>
 
   <!-- <mat-toolbar-row>

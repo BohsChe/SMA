@@ -34,3 +34,14 @@ export interface FarmerFilterQuery {
     villageId: string;
     farmerNo: string;
 }
+
+export interface UpdateFarmerApiData {
+    mobileNo: string;
+    farmerNo:string;
+    newVillageName:string;
+    newFarmerName:string;
+    newMilkType:string;
+    newGender:string;
+    newAddress:string;
+    newMobileNo:string;
+}

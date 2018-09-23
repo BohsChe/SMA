@@ -1,0 +1,9 @@
+.nav-right{
+    float: right;
+}
+ul.nav-right li{
+    list-style-type: none;
+}
+.spacer{
+    flex: 1 1;
+}
