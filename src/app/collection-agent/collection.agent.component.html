@@ -13,15 +13,13 @@
         id="agentsFilterWrapper">
         <input matInput
           (keyup)="applyFilter($event.target.value)"
-          [(ngModel)]="agentsFilterQuery"
-          (ngModelChange)="doSomething($event)"
           placeholder="Filter">
       </mat-form-field>
       <div fxFlex></div>
       <div fxFlex="130px">
         <button class="mat-primary"
           mat-raised-button
-          (click)="openAgentDialog({}, 'ADD')">Add Agent
+          (click)="openAgentDialog(agentAddData, 'ADD')">Add Agent
         </button>
       </div>
 

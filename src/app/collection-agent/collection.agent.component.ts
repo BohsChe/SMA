@@ -31,6 +31,14 @@ export class CollectionAgentComponent implements OnInit {
   // to handle ajax calls
   httpRequestService: HttpRequestServiceService;
 
+  // dummy varaiable
+  agentAddData: AgentRowData = {
+    agent_id: '',
+    name: '',
+    password: '',
+    user_id: ''
+  }
+
   constructor(
     httpRequestService: HttpRequestServiceService,
     public dialog: MatDialog

@@ -13,8 +13,6 @@
         id="farmerFilterWrapper">
         <input matInput
           (keyup)="applyFilter($event.target.value)"
-          [(ngModel)]="farmerFilterQuery"
-          (ngModelChange)="doSomething($event)"
           placeholder="Filter">
       </mat-form-field>
       <mat-form-field fxFlex
