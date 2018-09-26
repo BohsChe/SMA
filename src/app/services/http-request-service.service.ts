@@ -66,7 +66,7 @@ export class HttpRequestServiceService {
    */
   getAllCollectionAgents(){
     const options = { params: new HttpParams()
-      .set('mobileNo', "9941840515")
+      .set('mobileNo', this.userDetails.mobileNo)
     };
     return this.httpClient.get(this.pageUrl + '/getCollectionAgents.php', options);
   }
