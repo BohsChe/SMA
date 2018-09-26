@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+// to read route params
 import { ActivatedRoute } from '@angular/router';
 import { MatPaginator, MatTableDataSource, MatSelect } from '@angular/material';
 import { MatDialog } from '@angular/material';

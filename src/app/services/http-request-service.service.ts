@@ -9,7 +9,7 @@ import { AddFarmerDialogData, UpdateFarmerApiData, FarmerTableRowData } from '..
 export class HttpRequestServiceService {
   pageUrl: string = environment.apiUrl;
   userDetails: any = {
-    mobileNo: "9941840511",
+    mobileNo: "9941840515",
     deviceId: "test",
     deviceModel: "t",
     deviceType: "testType",
@@ -60,8 +60,10 @@ export class HttpRequestServiceService {
    * To get all collection agents
    */
   getAllCollectionAgents(){
-    // TO DO: get user details and sent
-    return this.httpClient.get(this.pageUrl + '/getCollectionAgents.php');
+    const options = { params: new HttpParams()
+      .set('mobileNo', this.userDetails.mobileNo)
+    };
+    return this.httpClient.get(this.pageUrl + '/getCollectionAgents.php', options);
   }
 
   /**

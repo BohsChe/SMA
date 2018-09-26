@@ -37,10 +37,10 @@ import { AddVillageDialogComponent } from './village/add/add.village.dialog.comp
 import { EditVillageComponent } from './village/edit/edit.village.component';
 import { DeleteVillageDialogComponent } from './village/delete/delete.component';
 import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
-import { EditFarmerComponent } from './edit-farmer/edit-farmer.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DeleteFarmerComponent } from './farmers/delete-farmer/delete-farmer.component';
+import { CollectionAgentComponent } from './collection-agent/collection.agent.component';
 
 
 @NgModule({
@@ -53,10 +53,10 @@ import { DeleteFarmerComponent } from './farmers/delete-farmer/delete-farmer.com
     EditVillageComponent,
     DeleteVillageDialogComponent,
     AddFarmerComponent,
-    EditFarmerComponent,
     HeaderComponent,
     AuthLayoutComponent,
-    DeleteFarmerComponent
+    DeleteFarmerComponent,
+    CollectionAgentComponent
   ],
   imports: [
     BrowserModule,
