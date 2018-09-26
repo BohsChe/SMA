@@ -31,7 +31,6 @@ export class AddAgentComponent implements OnInit {
     if( data.dialogMode == "EDIT"){
       this.dialogTitle = "Edit Agent Info";
       this.dialogBtnText = "Edit Agent";
-      this.agentInfo.agentName = data.agentData.name;
       this.oldAgentData = data.agentData;
     }else{
       this.dialogTitle = "Add Agent Info";
@@ -40,6 +39,8 @@ export class AddAgentComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.agentInfo.agentName = this.oldAgentData.name;
+    this.agentInfo.password = this.oldAgentData.password;
   }
 
   onSubmit(){
@@ -54,8 +55,8 @@ export class AddAgentComponent implements OnInit {
       let data: EditAgentApiInfo = {
         mobileNo: "",
         newAgentName: this.agentInfo.agentName,
-        agentPassword: this.agentInfo.password,
-        oldAgentName: this.oldAgentData.name
+        oldAgentName: this.oldAgentData.name,
+        newAgentPassword: this.agentInfo.password
       }
       this.editAgent(data);
     }

@@ -67,6 +67,7 @@ export class HttpRequestServiceService {
   getAllCollectionAgents(){
     const options = { params: new HttpParams()
       .set('mobileNo', this.userDetails.mobileNo)
+      // .set('mobileNo', "9941840515")
     };
     return this.httpClient.get(this.pageUrl + '/getCollectionAgents.php', options);
   }
@@ -76,7 +77,7 @@ export class HttpRequestServiceService {
    */
   updateAgentInfo(agentInfo: EditAgentApiInfo){
     agentInfo.mobileNo = this.userDetails.mobileNo;
-    return this.httpClient.get(this.pageUrl + '/updateCollectionAgent.php', {
+    return this.httpClient.get(this.pageUrl + '/updateCollectionAgentNameAndPassword.php', {
       params: Object.entries(agentInfo).reduce(
           (params, [key, value]) => params.set(key, value), new HttpParams())
       });

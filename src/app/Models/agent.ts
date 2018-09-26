@@ -11,7 +11,7 @@ export interface EditAgentApiInfo{
     mobileNo: string;
     oldAgentName: string;
     newAgentName: string;
-    agentPassword: string;
+    newAgentPassword: string;
 }
 
 export interface AddAgentApiData{
