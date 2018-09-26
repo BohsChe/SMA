@@ -6,6 +6,7 @@ import { HttpRequestServiceService } from '../services/http-request-service.serv
 import { AgentRowData, AgentDialogData } from "../Models/agent";
 // components for dialog
 import { AddAgentComponent } from './add-agent/add-agent.component';
+import { DeleteAgentComponent } from './delete-agent/delete-agent.component';
 
 @Component({
   selector: 'app-collection.agent',
@@ -66,6 +67,17 @@ export class CollectionAgentComponent implements OnInit {
     const dialogRef = this.dialog.open(AddAgentComponent, {
       width: '300px',
       data: data
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAgentList();
+    });
+  }
+
+  openDeleteAgentDialog( agentData: AgentRowData ){
+    const dialogRef = this.dialog.open(DeleteAgentComponent, {
+      width: '300px',
+      data: agentData
     });
 
     dialogRef.afterClosed().subscribe(result => {

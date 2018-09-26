@@ -1,0 +1,14 @@
+<h2 mat-dialog-title>Delete Village</h2>
+<mat-dialog-content>
+  Do you really want to delete this agent <strong>{{ agentInfo.name }}</strong> from the list?
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button
+    class="mat-primary"
+    (click)="onDeleteAgentSubmit()"
+    mat-raised-button>Yes</button>
+  <button
+    class="mat-primary"
+    (click)="onNoClick()"
+    mat-raised-button>cancel</button>
+</mat-dialog-actions>

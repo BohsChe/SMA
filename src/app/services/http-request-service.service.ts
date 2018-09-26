@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserAuthInfo, VillageModel } from '../Models/user-auth-info';
 import { environment } from '../../environments/environment';
 import { AddFarmerDialogData, UpdateFarmerApiData, FarmerTableRowData } from '../Models/farmer';
-import { AddAgentApiData, EditAgentApiInfo } from '../Models/agent';
+import { AddAgentApiData, EditAgentApiInfo, DeleteAgentApiData } from '../Models/agent';
 
 @Injectable()
 export class HttpRequestServiceService {
@@ -77,6 +77,17 @@ export class HttpRequestServiceService {
   updateAgentInfo(agentInfo: EditAgentApiInfo){
     agentInfo.mobileNo = this.userDetails.mobileNo;
     return this.httpClient.get(this.pageUrl + '/updateCollectionAgent.php', {
+      params: Object.entries(agentInfo).reduce(
+          (params, [key, value]) => params.set(key, value), new HttpParams())
+      });
+  }
+
+  /**
+   * To delete an agent info
+   */
+  deleteAgent(agentInfo: DeleteAgentApiData){
+    agentInfo.mobileNo = this.userDetails.mobileNo;
+    return this.httpClient.get(this.pageUrl + '/deleteCollectionAgent.php', {
       params: Object.entries(agentInfo).reduce(
           (params, [key, value]) => params.set(key, value), new HttpParams())
       });
