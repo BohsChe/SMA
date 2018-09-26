@@ -5,6 +5,7 @@ import { UserAuthInfo, VillageModel } from '../Models/user-auth-info';
 import { environment } from '../../environments/environment';
 import { AddFarmerDialogData, UpdateFarmerApiData, FarmerTableRowData } from '../Models/farmer';
 import { AddAgentApiData, EditAgentApiInfo, DeleteAgentApiData } from '../Models/agent';
+import { AddTransactionApiData } from '../Models/Transaction';
 
 @Injectable()
 export class HttpRequestServiceService {
@@ -202,9 +203,21 @@ export class HttpRequestServiceService {
 
   /**
    * to insert transaction
+   * mobileNo:{{mobileNumber}}
+     farmerId:farmerNo
+     date:date
+     session:M/E
+     liters:5
+     fat:5.5
+     agentId:agentId
+     deviceId:deviceId
+     snf:snf
    */
-  insertTransaction(transactionInfo){
-    return this.httpClient.get(this.pageUrl + '/insertTransaction.php', transactionInfo);
+  insertTransaction(transactionInfo: AddTransactionApiData){
+    return this.httpClient.get(this.pageUrl + '/insertTransaction.php', {
+      params: Object.entries(transactionInfo).reduce(
+          (params, [key, value]) => params.set(key, value), new HttpParams())
+      });
   }
 
   /**
