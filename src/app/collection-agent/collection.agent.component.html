@@ -21,7 +21,7 @@
       <div fxFlex="130px">
         <button class="mat-primary"
           mat-raised-button
-          (click)="openAddAgentDialog()">Add Agent
+          (click)="openAgentDialog({}, 'ADD')">Add Agent
         </button>
       </div>
 
@@ -55,7 +55,7 @@
         <mat-cell *matCellDef="let element">
           <button class="mat-primary"
             mat-raised-button
-            (click)="openEditAgentDialog(element)">Edit
+            (click)="openAgentDialog(element, 'EDIT')">Edit
           </button>
         </mat-cell>
       </ng-container>

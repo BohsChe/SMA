@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import { UserAuthInfo, VillageModel } from '../Models/user-auth-info';
 import { environment } from '../../environments/environment';
 import { AddFarmerDialogData, UpdateFarmerApiData, FarmerTableRowData } from '../Models/farmer';
+import { AddAgentApiData, EditAgentApiInfo } from '../Models/agent';
 
 @Injectable()
 export class HttpRequestServiceService {
@@ -52,8 +53,12 @@ export class HttpRequestServiceService {
    * Significance: to add a collection agent 
    * @param
    */
-  addCollectionAgent(agentInfo){
-    return this.httpClient.get(this.pageUrl + '/addCollectionAgent.php', agentInfo);
+  addCollectionAgent(agentInfo: AddAgentApiData){
+    agentInfo.mobileNo = this.userDetails.mobileNo;
+    return this.httpClient.get(this.pageUrl + '/addCollectionAgent.php', {
+      params: Object.entries(agentInfo).reduce(
+          (params, [key, value]) => params.set(key, value), new HttpParams())
+      });
   }
 
   /**
@@ -61,7 +66,7 @@ export class HttpRequestServiceService {
    */
   getAllCollectionAgents(){
     const options = { params: new HttpParams()
-      .set('mobileNo', this.userDetails.mobileNo)
+      .set('mobileNo', "9941840515")
     };
     return this.httpClient.get(this.pageUrl + '/getCollectionAgents.php', options);
   }
@@ -69,8 +74,12 @@ export class HttpRequestServiceService {
   /**
    * To update an agent info
    */
-  updateAgentInfo(agentInfo){
-    return this.httpClient.get(this.pageUrl + '/updateCollectionAgent.php', agentInfo);
+  updateAgentInfo(agentInfo: EditAgentApiInfo){
+    agentInfo.mobileNo = this.userDetails.mobileNo;
+    return this.httpClient.get(this.pageUrl + '/updateCollectionAgent.php', {
+      params: Object.entries(agentInfo).reduce(
+          (params, [key, value]) => params.set(key, value), new HttpParams())
+      });
   }
 
   /**

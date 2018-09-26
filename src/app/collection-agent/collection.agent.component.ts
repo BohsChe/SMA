@@ -2,6 +2,10 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource, MatDialog } from '@angular/material';
 // custom services
 import { HttpRequestServiceService } from '../services/http-request-service.service';
+// import Models
+import { AgentRowData, AgentDialogData } from "../Models/agent";
+// components for dialog
+import { AddAgentComponent } from './add-agent/add-agent.component';
 
 @Component({
   selector: 'app-collection.agent',
@@ -54,12 +58,19 @@ export class CollectionAgentComponent implements OnInit {
       });
   }
 
-  openAddAgentDialog(){
-    
-  }
+  openAgentDialog( agentData: AgentRowData, dialogMode: string){
+    let data: AgentDialogData = {
+      agentData,
+      dialogMode
+    }
+    const dialogRef = this.dialog.open(AddAgentComponent, {
+      width: '300px',
+      data: data
+    });
 
-  openEditAgentDialog(){
-
+    dialogRef.afterClosed().subscribe(result => {
+      this.getAgentList();
+    });
   }
 
 }

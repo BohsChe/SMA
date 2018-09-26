@@ -41,6 +41,7 @@ import { HeaderComponent } from './header/header.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
 import { DeleteFarmerComponent } from './farmers/delete-farmer/delete-farmer.component';
 import { CollectionAgentComponent } from './collection-agent/collection.agent.component';
+import { AddAgentComponent } from './collection-agent/add-agent/add-agent.component';
 
 
 @NgModule({
@@ -56,7 +57,8 @@ import { CollectionAgentComponent } from './collection-agent/collection.agent.co
     HeaderComponent,
     AuthLayoutComponent,
     DeleteFarmerComponent,
-    CollectionAgentComponent
+    CollectionAgentComponent,
+    AddAgentComponent
   ],
   imports: [
     BrowserModule,
@@ -86,7 +88,8 @@ import { CollectionAgentComponent } from './collection-agent/collection.agent.co
     EditVillageComponent,
     DeleteVillageDialogComponent,
     AddFarmerComponent,
-    DeleteFarmerComponent
+    DeleteFarmerComponent,
+    AddAgentComponent
   ],
   exports: [
     BrowserAnimationsModule,
