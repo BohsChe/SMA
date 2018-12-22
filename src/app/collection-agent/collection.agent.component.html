@@ -2,58 +2,64 @@
 <mat-card>
   <div class="pagination-container mat-elevation-z8">
     <!-- agents filter section starts -->
-    <div class="pagination-header"
+    <div
+      class="pagination-header"
       fxLayout="row"
       fxLayoutGap="10px"
-      fxLayoutAlign="end center">
+      fxLayoutAlign="end center"
+    >
       <div fxFlex>
         <h2 class="title">Agents({{ AgentsCount }})</h2>
       </div>
-      <mat-form-field fxFlex="200px"
-        id="agentsFilterWrapper">
-        <input matInput
+      <mat-form-field fxFlex="200px" id="agentsFilterWrapper">
+        <input
+          matInput
           (keyup)="applyFilter($event.target.value)"
-          placeholder="Filter">
+          placeholder="Filter"
+        />
       </mat-form-field>
       <div fxFlex></div>
       <div fxFlex="130px">
-        <button class="mat-primary"
+        <button
+          class="mat-primary"
           mat-raised-button
-          (click)="openAgentDialog(agentAddData, 'ADD')">Add Agent
+          (click)="openAgentDialog(agentAddData, 'ADD')"
+        >
+          Add Agent
         </button>
       </div>
-
     </div>
     <!-- agents filter section ends -->
 
-    <mat-table #table
-      [dataSource]="AgentTabledataSource">
-
+    <mat-table #table [dataSource]="AgentTabledataSource">
       <!-- Position Column -->
       <ng-container matColumnDef="agent_id">
-        <mat-header-cell *matHeaderCellDef> agents Name </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.agent_id}} </mat-cell>
+        <mat-header-cell *matHeaderCellDef> Agents Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.agent_id }} </mat-cell>
       </ng-container>
 
       <!-- Name Column -->
       <ng-container matColumnDef="name">
         <mat-header-cell *matHeaderCellDef> Gender </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{ element.name }} </mat-cell>
       </ng-container>
 
       <!-- Weight Column -->
       <ng-container matColumnDef="password">
         <mat-header-cell *matHeaderCellDef> Address </mat-header-cell>
-        <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+        <mat-cell *matCellDef="let element"> {{ element.password }} </mat-cell>
       </ng-container>
 
       <!-- Edit Column -->
       <ng-container matColumnDef="agents_edit">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mat-primary"
+          <button
+            class="mat-primary"
             mat-raised-button
-            (click)="openAgentDialog(element, 'EDIT')">Edit
+            (click)="openAgentDialog(element, 'EDIT')"
+          >
+            Edit
           </button>
         </mat-cell>
       </ng-container>
@@ -62,23 +68,27 @@
       <ng-container matColumnDef="agents_delete">
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let element">
-          <button class="mat-primary"
+          <button
+            class="mat-primary"
             mat-raised-button
-            (click)="openDeleteAgentDialog(element )">Delete
+            (click)="openDeleteAgentDialog(element)"
+          >
+            Delete
           </button>
         </mat-cell>
       </ng-container>
 
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       <mat-row> No agentss found.</mat-row>
-
     </mat-table>
-    <mat-paginator #paginator
+    <mat-paginator
+      #paginator
       [length]="AgentsCount"
       [pageSize]="10"
       [pageSizeOptions]="[5, 10, 20]"
-      [showFirstLastButtons]="true">
+      [showFirstLastButtons]="true"
+    >
     </mat-paginator>
   </div>
 </mat-card>

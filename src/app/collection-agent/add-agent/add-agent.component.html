@@ -1,36 +1,42 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
-<form name="form"
+<form
+  name="form"
   (ngSubmit)="f.form.valid && onSubmit()"
   #f="ngForm"
-  novalidate>
+  novalidate
+>
   <mat-dialog-content>
-
     <mat-form-field class="example-full-width">
-      <input matInput
+      <input
+        #agentName="ngModel"
+        matInput
         placeholder="Agent Name"
         name="agentName"
-        [(ngModel)]="agentInfo.agentName">
-      <!-- <mat-error *ngIf="AgentNameFormControl.hasError('required')">
-            Agent Name is
-            <strong>required</strong>
-        </mat-error> -->
+        [(ngModel)]="agentInfo.agentName"
+        required
+      />
+      <mat-error *ngIf="agentName.invalid && agentName.errors.required">
+        Agent Name is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
 
     <mat-form-field class="example-full-width">
-      <input matInput
+      <input
+        #password="ngModel"
+        matInput
         placeholder="Agent Password"
-        name="agentName"
-        [(ngModel)]="agentInfo.password">
-      <!-- <mat-error *ngIf="AgentNameFormControl.hasError('required')">
-          Agent Name is
-          <strong>required</strong>
-      </mat-error> -->
+        name="agentPassword"
+        [(ngModel)]="agentInfo.password"
+        required
+      />
+      <mat-error *ngIf="password.invalid && password.errors.required">
+        Password is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
-
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="submit"
-      class="mat-primary"
-      mat-raised-button>{{ dialogBtnText }}</button>
+    <button type="submit" class="mat-primary" mat-raised-button>
+      {{ dialogBtnText }}
+    </button>
   </mat-dialog-actions>
 </form>
