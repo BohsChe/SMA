@@ -1,62 +1,101 @@
 <h2 mat-dialog-title>{{ dialogTitle }}</h2>
-<form name="form"
+<form
+  name="form"
   (ngSubmit)="f.form.valid && onSubmit()"
   #f="ngForm"
-  novalidate>
+  novalidate
+>
   <mat-dialog-content>
     <mat-form-field class="example-full-width">
-      <input matInput
+      <input
+        matInput
+        placeholder="Farmer no"
+        name="farmerNo"
+        type="number"
+        [(ngModel)]="farmerDialogData.farmerFormData.farmerNo"
+        #farmerNo="ngModel"
+        required
+      />
+      <span></span>
+      <mat-error *ngIf="farmerNo.invalid && farmerNo.errors.required">
+        Farmer no is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input
+        #farmerName="ngModel"
+        matInput
         placeholder="Farmer Name"
         name="FarmerName"
-        [(ngModel)]="farmerDialogData.farmerFormData.farmerName">
-      <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
-            Farmer Name is
-            <strong>required</strong>
-        </mat-error> -->
+        [(ngModel)]="farmerDialogData.farmerFormData.farmerName"
+        required
+      />
+      <mat-error *ngIf="farmerName.invalid && farmerName.errors.required">
+        Farmer Name is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
-    <mat-button-toggle-group #group="matButtonToggleGroup" [(value)]="farmerDialogData.farmerFormData.gender">
-      <mat-button-toggle value="M">
-        Male
-      </mat-button-toggle>
-      <mat-button-toggle value="F">
-        Female
-      </mat-button-toggle>
+
+    <mat-button-toggle-group
+      #group="matButtonToggleGroup"
+      [(value)]="farmerDialogData.farmerFormData.gender"
+    >
+      <mat-button-toggle value="M"> Male </mat-button-toggle>
+      <mat-button-toggle value="F"> Female </mat-button-toggle>
     </mat-button-toggle-group>
+
     <mat-form-field class="example-full-width">
-      <input matInput
+      <input
+        matInput
+        #farmerAddress="ngModel"
         placeholder="Address"
         name="Address"
-        [(ngModel)]="farmerDialogData.farmerFormData.address">
-      <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
-        Farmer Name is
-        <strong>required</strong>
-    </mat-error> -->
+        [(ngModel)]="farmerDialogData.farmerFormData.address"
+        required
+      />
+      <mat-error *ngIf="farmerAddress.invalid && farmerAddress.errors.required">
+        Farmer address is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
-      <input matInput
+      <span matPrefix>+91</span>
+      <input
+        matInput
+        #farmerMobileNo="ngModel"
         placeholder="Farmer mobile no."
         name="fMobileNo"
-        [(ngModel)]="farmerDialogData.farmerFormData.fMobileNo">
-      <!-- <mat-error *ngIf="FarmerNameFormControl.hasError('required')">
-      Farmer Name is
-      <strong>required</strong>
-  </mat-error> -->
+        type="tel"
+        [(ngModel)]="farmerDialogData.farmerFormData.fMobileNo"
+        maxlength="10"
+        required
+      />
+      <mat-hint align="end">{{ farmerMobileNo.value.length }} / 10</mat-hint>
+      <mat-error
+        *ngIf="farmerMobileNo.invalid && farmerMobileNo.errors.required"
+      >
+        Mobile number is <strong>required</strong>
+      </mat-error>
     </mat-form-field>
+
     <mat-form-field>
-      <mat-select placeholder="Select milkType"
-          [(ngModel)]="farmerDialogData.farmerFormData.milkType"
-          name="milkType"
-          [(value)]="farmerDialogData.farmerFormData.milkType">
-          <mat-option *ngFor="let milkType of milkTypes"
-            [value]="milkType">
-            {{milkType}}
-          </mat-option>
-        </mat-select>
+      <mat-select
+        #milktype="ngModel"
+        placeholder="Select milkType"
+        [(ngModel)]="farmerDialogData.farmerFormData.milkType"
+        name="milkType"
+        [(value)]="farmerDialogData.farmerFormData.milkType"
+        required
+      >
+        <mat-option *ngFor="let milkType of milkTypes" [value]="milkType">
+          {{ milkType }}
+        </mat-option>
+      </mat-select>
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button type="submit"
-      class="mat-primary"
-      mat-raised-button>{{ dialogBtnText }}</button>
+    <button type="submit" class="mat-primary" mat-raised-button>
+      {{ dialogBtnText }}
+    </button>
   </mat-dialog-actions>
 </form>

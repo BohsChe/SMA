@@ -36,6 +36,8 @@ import { VillageComponent } from './village/village.component';
 import { AddVillageDialogComponent } from './village/add/add.village.dialog.component';
 import { EditVillageComponent } from './village/edit/edit.village.component';
 import { DeleteVillageDialogComponent } from './village/delete/delete.component';
+
+// Farmer module
 import { AddFarmerComponent } from './farmers/add-farmer/add.farmer.component';
 import { HeaderComponent } from './header/header.component';
 import { AuthLayoutComponent } from './layouts/auth-layout/auth-layout.component';
