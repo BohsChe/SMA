@@ -1,14 +1,20 @@
 <h2 mat-dialog-title>Delete Village</h2>
 <mat-dialog-content>
-  Do you really want to delete this village <strong>{{ villageInfo.village_name }}</strong>?
+  <p class="mat-subheading-1">
+    Do you really want to delete this village
+    <strong>{{ villageInfo.village_name }}</strong
+    >?
+  </p>
 </mat-dialog-content>
 <mat-dialog-actions>
   <button
     class="mat-primary"
     (click)="onDeleteVillageSubmit()"
-    mat-raised-button>Yes</button>
-  <button
-    class="mat-primary"
-    (click)="onNoClick()"
-    mat-raised-button>cancel</button>
+    mat-raised-button
+  >
+    Yes
+  </button>
+  <button class="mat-primary" (click)="onNoClick()" mat-raised-button>
+    No
+  </button>
 </mat-dialog-actions>

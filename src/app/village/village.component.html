@@ -1,86 +1,111 @@
 <app-header></app-header>
 <mat-card>
-    <div class="pagination-container mat-elevation-z8" id="village-pagination-container">
-        <section class="mat-typography">
-            <div class="pagination-header"
-                fxLayout="row"
-                fxLayoutAlign="start center">
-                <div fxFlex="300px">
-                    <h1 class="title">{{ 'Villages (' + villageTotalCount + ')' }}</h1>
-                </div>
-                <mat-form-field fxFlexOffset="15px">
-                    <input matInput
-                        (keyup)="applyFilter($event.target.value)"
-                        placeholder="Search village">
-                </mat-form-field>
-                <div fxFlex="100px">
-                    <button class="mat-primary"
-                        mat-raised-button
-                        (click)="openAddVillageDialog()">Add
-                    </button>
-                </div>
-            </div>
-        </section>
-        <mat-table #table
-            matSort
-            [dataSource]="villageList">
+  <div
+    class="pagination-container mat-elevation-z8"
+    id="village-pagination-container"
+  >
+    <section class="mat-typography">
+      <div
+        class="pagination-header"
+        fxLayout="row"
+        fxLayoutAlign="start center"
+      >
+        <div fxFlex="300px">
+          <h1 class="title">{{ "Villages (" + villageTotalCount + ")" }}</h1>
+        </div>
+        <mat-form-field fxFlexOffset="15px">
+          <input
+            matInput
+            (keyup)="applyFilter($event.target.value)"
+            placeholder="Search village"
+          />
+        </mat-form-field>
+        <div fxFlex="100px">
+          <button
+            class="mat-primary"
+            mat-raised-button
+            (click)="openAddVillageDialog()"
+          >
+            Add
+          </button>
+        </div>
+      </div>
+    </section>
+    <mat-table #table matSort [dataSource]="villageList">
+      <!-- Id Column -->
+      <ng-container matColumnDef="village_id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header
+          >Village Id
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.village_id }}
+        </mat-cell>
+      </ng-container>
 
-            <!-- Id Column -->
-            <ng-container matColumnDef="village_id">
-                <mat-header-cell *matHeaderCellDef
-                    mat-sort-header>Village Id </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.village_id}} </mat-cell>
-            </ng-container>
+      <!-- Name Column -->
+      <ng-container matColumnDef="village_name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header>
+          Village Name
+        </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          {{ element.village_name }}
+        </mat-cell>
+      </ng-container>
 
-            <!-- Name Column -->
-            <ng-container matColumnDef="village_name">
-                <mat-header-cell *matHeaderCellDef
-                    mat-sort-header> Village Name </mat-header-cell>
-                <mat-cell *matCellDef="let element"> {{element.village_name}} </mat-cell>
-            </ng-container>
+      <!-- Edit Village Column -->
+      <ng-container matColumnDef="action_edit">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            class="mat-primary"
+            mat-raised-button
+            (click)="openEditVillageDialog(element.village_name)"
+          >
+            Edit
+          </button>
+        </mat-cell>
+      </ng-container>
 
-            <!-- Edit Village Column -->
-            <ng-container matColumnDef="action_edit">
-                <mat-header-cell *matHeaderCellDef
-                    mat-sort-header></mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <button class="mat-primary"
-                        mat-raised-button
-                        (click)="openEditVillageDialog(element.village_name)">Edit
-                    </button>
-                </mat-cell>
-            </ng-container>
+      <!-- Delete Village Column -->
+      <ng-container matColumnDef="action_delete">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            class="mat-primary"
+            mat-raised-button
+            (click)="deleteVillageDialog(element)"
+          >
+            Delete
+          </button>
+        </mat-cell>
+      </ng-container>
 
-            <!-- Delete Village Column -->
-            <ng-container matColumnDef="action_delete">
-                <mat-header-cell *matHeaderCellDef></mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <button class="mat-primary"
-                        mat-raised-button
-                        (click)="deleteVillageDialog(element)">Delete
-                    </button>
-                </mat-cell>
-            </ng-container>
+      <!-- View farmers Column -->
+      <ng-container matColumnDef="view_farmers">
+        <mat-header-cell *matHeaderCellDef mat-sort-header></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a
+            routerLink="/farmers"
+            [queryParams]="{
+              villageId: element.village_id,
+              villageName: element.village_name
+            }"
+            mat-stroked-button
+            >View farmers</a
+          >
+        </mat-cell>
+      </ng-container>
 
-            <!-- View farmers Column -->
-            <ng-container matColumnDef="view_farmers">
-                <mat-header-cell *matHeaderCellDef
-                    mat-sort-header></mat-header-cell>
-                <mat-cell *matCellDef="let element">
-                    <a routerLink="/farmers"
-                        [queryParams]="{ villageId: element.village_id, villageName: element.village_name}"
-                        mat-stroked-button>View farmers</a>
-                </mat-cell>
-            </ng-container>
-
-            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
-        </mat-table>
-        <mat-paginator #paginator
-            [length]="villageTotalCount"
-            [pageSize]="10"
-            [pageSizeOptions]="[5, 10, 20]"
-            [showFirstLastButtons]="true">
-        </mat-paginator>
-    </div>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator
+      #paginator
+      [length]="villageTotalCount"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
 </mat-card>
