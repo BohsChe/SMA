@@ -1,9 +1,12 @@
-.nav-right{
-    float: right;
+.nav-right {
+  float: right;
 }
-ul.nav-right li{
-    list-style-type: none;
+
+ul.nav-right li {
+  list-style-type: none;
+  display: inline-block;
 }
-.spacer{
-    flex: 1 1;
+
+.spacer {
+  flex: 1 1;
 }
