@@ -48,6 +48,7 @@ import { DeleteAgentComponent } from './collection-agent/delete-agent/delete-age
 import { FatComponent } from './fat/fat.component';
 import { AddFatComponent } from './fat/add-fat/add.fat.component';
 import { DeleteFatComponent } from './fat/delete-fat/delete.fat.component';
+import { TransactionComponent } from './transaction/transaction.component';
 
 
 @NgModule({
@@ -68,7 +69,8 @@ import { DeleteFatComponent } from './fat/delete-fat/delete.fat.component';
     DeleteAgentComponent,
     FatComponent,
     AddFatComponent,
-    DeleteFatComponent
+    DeleteFatComponent,
+    TransactionComponent
   ],
   imports: [
     BrowserModule,

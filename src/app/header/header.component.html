@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>{{title}}</span>
+    <span>{{ title }}</span>
     <span class="spacer"></span>
     <ul class="nav-right">
       <li>
@@ -9,7 +9,11 @@
         </a>
       </li>
       <li>
-        <a [routerLink]="['/collection-agents']" mat-button id="collection-agents">
+        <a
+          [routerLink]="['/collection-agents']"
+          mat-button
+          id="collection-agents"
+        >
           Agents
         </a>
       </li>
@@ -18,8 +22,12 @@
           Fats
         </a>
       </li>
+      <li>
+        <a [routerLink]="['/transactions']" mat-button id="transactions">
+          Transactions
+        </a>
+      </li>
     </ul>
-
   </mat-toolbar-row>
 
   <!-- <mat-toolbar-row>
