@@ -27,6 +27,7 @@ export interface AddFarmerDialogData {
   villageName: string;
   farmerFormData: AddFarmerFormData;
   type: string;
+  farmerNo: string;
 }
 
 export interface FarmerFilterQuery {

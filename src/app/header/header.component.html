@@ -1,4 +1,4 @@
-<mat-toolbar color="primary">  
+<mat-toolbar color="primary">
   <mat-toolbar-row>
     <span>{{title}}</span>
     <span class="spacer"></span>
@@ -13,8 +13,13 @@
           Agents
         </a>
       </li>
+      <li>
+        <a [routerLink]="['/fats']" mat-button id="fats">
+          Fats
+        </a>
+      </li>
     </ul>
-    
+
   </mat-toolbar-row>
 
   <!-- <mat-toolbar-row>

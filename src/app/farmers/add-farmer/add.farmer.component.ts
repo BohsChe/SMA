@@ -32,7 +32,6 @@ export class AddFarmerComponent {
   ) {
     this.HttpRequestService = HttpRequestServiceService;
     this.farmerDialogData = data;
-    debugger;
     if (this.farmerDialogData.type !== "add") {
       this.dialogMode = "EDIT";
       this.dialogTitle = "Edit Farmer";

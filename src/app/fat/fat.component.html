@@ -1,0 +1,103 @@
+<app-header></app-header>
+<mat-card>
+  <div class="pagination-container mat-elevation-z8">
+    <!-- fats filter section starts -->
+    <div
+      class="pagination-header"
+      fxLayout="row"
+      fxLayoutGap="10px"
+      fxLayoutAlign="end center"
+    >
+      <div fxFlex>
+        <h2 class="title">Fats({{ FatsCount }})</h2>
+      </div>
+      <mat-form-field fxFlex="200px" id="fatsFilterWrapper">
+        <input
+          matInput
+          (keyup)="applyFilter($event.target.value)"
+          placeholder="Filter"
+        />
+      </mat-form-field>
+      <mat-form-field>
+        <mat-select
+          #fatType="ngModel"
+          placeholder="Select fatType"
+          [(ngModel)]="fatFilterType"
+          name="fatType"
+          [(value)]="fatFilterType"
+          (change)="getFatList()"
+          required
+        >
+          <mat-option *ngFor="let fatType of fatTypes" [value]="fatType">
+            {{ fatType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div fxFlex></div>
+      <div fxFlex="130px">
+        <button
+          class="mat-primary"
+          mat-raised-button
+          (click)="openFatDialog(agentAddData, 'ADD')"
+        >
+          Add Fat
+        </button>
+      </div>
+    </div>
+    <!-- fats filter section ends -->
+
+    <mat-table #table [dataSource]="FatTabledataSource">
+      <!-- Position Column -->
+      <ng-container matColumnDef="Fat">
+        <mat-header-cell *matHeaderCellDef> Fats Name </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.fat }} </mat-cell>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="Fat rate">
+        <mat-header-cell *matHeaderCellDef> Fats rate </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{ element.fat_rate }} </mat-cell>
+      </ng-container>
+
+      <!-- Edit Column -->
+      <ng-container matColumnDef="fats_edit">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            class="mat-primary"
+            mat-raised-button
+            (click)="openFatDialog(element, 'EDIT')"
+          >
+            Edit
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <!-- Delete Column -->
+      <ng-container matColumnDef="fats_delete">
+        <mat-header-cell *matHeaderCellDef></mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button
+            class="mat-primary"
+            mat-raised-button
+            (click)="openDeleteFatDialog(element)"
+          >
+            Delete
+          </button>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      <mat-row> No fatss found.</mat-row>
+    </mat-table>
+    <mat-paginator
+      #paginator
+      [length]="FatsCount"
+      [pageSize]="10"
+      [pageSizeOptions]="[5, 10, 20]"
+      [showFirstLastButtons]="true"
+    >
+    </mat-paginator>
+  </div>
+</mat-card>

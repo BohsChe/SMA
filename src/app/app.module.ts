@@ -2,27 +2,27 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FlexLayoutModule} from '@angular/flex-layout';
-import { FormsModule, ReactiveFormsModule }   from '@angular/forms';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 // Material UI components
 import { MatButtonModule, MatCheckboxModule } from '@angular/material';
-import {MatInputModule} from '@angular/material/input';
-import {MatCardModule} from '@angular/material/card';
-import {MatGridListModule} from '@angular/material/grid-list';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatTabsModule} from '@angular/material/tabs';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatDialogModule} from '@angular/material/dialog';
-import {MatSnackBarModule} from '@angular/material/snack-bar';
-import {MatSelectModule} from '@angular/material/select';
-import {MatButtonToggleModule} from '@angular/material/button-toggle';
+import { MatInputModule } from '@angular/material/input';
+import { MatCardModule } from '@angular/material/card';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatTableModule } from '@angular/material/table';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MAT_DIALOG_DATA } from '@angular/material';
 
-import {ErrorStateMatcher, ShowOnDirtyErrorStateMatcher} from '@angular/material/core';
+import { ErrorStateMatcher, ShowOnDirtyErrorStateMatcher } from '@angular/material/core';
 import { AppComponent } from './app.component';
 import { LoginComponentComponent } from './login-component/login-component.component';
 import { HttpRequestServiceService } from './services/http-request-service.service';
@@ -45,6 +45,9 @@ import { DeleteFarmerComponent } from './farmers/delete-farmer/delete-farmer.com
 import { CollectionAgentComponent } from './collection-agent/collection.agent.component';
 import { AddAgentComponent } from './collection-agent/add-agent/add-agent.component';
 import { DeleteAgentComponent } from './collection-agent/delete-agent/delete-agent.component';
+import { FatComponent } from './fat/fat.component';
+import { AddFatComponent } from './fat/add-fat/add.fat.component';
+import { DeleteFatComponent } from './fat/delete-fat/delete.fat.component';
 
 
 @NgModule({
@@ -62,7 +65,10 @@ import { DeleteAgentComponent } from './collection-agent/delete-agent/delete-age
     DeleteFarmerComponent,
     CollectionAgentComponent,
     AddAgentComponent,
-    DeleteAgentComponent
+    DeleteAgentComponent,
+    FatComponent,
+    AddFatComponent,
+    DeleteFatComponent
   ],
   imports: [
     BrowserModule,
@@ -94,7 +100,9 @@ import { DeleteAgentComponent } from './collection-agent/delete-agent/delete-age
     AddFarmerComponent,
     DeleteFarmerComponent,
     AddAgentComponent,
-    DeleteAgentComponent
+    DeleteAgentComponent,
+    AddFatComponent,
+    DeleteFatComponent
   ],
   exports: [
     BrowserAnimationsModule,
@@ -116,8 +124,8 @@ import { DeleteAgentComponent } from './collection-agent/delete-agent/delete-age
     HttpRequestServiceService,
     AuthService,
     AuthGuard,
-    {provide: MAT_DIALOG_DATA, useValue: {} },
-    {provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher}
+    { provide: MAT_DIALOG_DATA, useValue: {} },
+    { provide: ErrorStateMatcher, useClass: ShowOnDirtyErrorStateMatcher }
   ],
   bootstrap: [AppComponent]
 })

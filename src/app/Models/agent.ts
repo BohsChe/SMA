@@ -1,31 +1,29 @@
-import { interceptingHandler } from "@angular/common/http/src/module";
-
-export interface AgentRowData{
+export interface AgentRowData {
     agent_id: string;
     name: string;
     password: string;
     user_id: string;
 }
 
-export interface EditAgentApiInfo{
+export interface EditAgentApiInfo {
     mobileNo: string;
     oldAgentName: string;
     newAgentName: string;
     newAgentPassword: string;
 }
 
-export interface AddAgentApiData{
+export interface AddAgentApiData {
     mobileNo: string;
     agentName: string;
     agentPassword: string;
 }
 
-export interface DeleteAgentApiData{
+export interface DeleteAgentApiData {
     mobileNo: string;
     agentName: string;
 }
 
-export interface AgentDialogData{
+export interface AgentDialogData {
     agentData: AgentRowData;
     dialogMode: string;
 }

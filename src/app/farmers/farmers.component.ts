@@ -118,7 +118,7 @@ export class FarmersComponent implements OnInit {
       milkType: farmerRowData.milk_type,
       farmerNo: farmerRowData.farmer_no
     };
-    let farmerDialogData: AddFarmerDialogData = {
+    let farmerDialogData: any = {
       farmerFormData: farmerFormData,
       milkType: this.farmerListQuery.milkType,
       villageName: this.farmerListQuery.villageName

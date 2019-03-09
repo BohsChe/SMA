@@ -5,7 +5,7 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { FarmersComponent } from './farmers/farmers.component'
 import { VillageComponent } from './village/village.component'
 import { CollectionAgentComponent } from './collection-agent/collection.agent.component';
-
+import { FatComponent } from "./fat/fat.component";
 import { HeaderComponent } from './header/header.component';
 
 const routes: Routes = [
@@ -13,17 +13,18 @@ const routes: Routes = [
   { path: 'farmers', component: FarmersComponent, canActivate: [AuthGuard] },
   { path: 'villages', component: VillageComponent, canActivate: [AuthGuard] },
   { path: 'collection-agents', component: CollectionAgentComponent, canActivate: [AuthGuard] },
+  { path: 'fats', component: FatComponent, canActivate: [AuthGuard] },
   { path: '**', redirectTo: '/login', pathMatch: 'full' }
 ];
 
 @NgModule({
   imports: [
-    [ RouterModule.forRoot(routes) ]
+    [RouterModule.forRoot(routes)]
   ],
-  exports:[RouterModule],
+  exports: [RouterModule],
   declarations: []
 })
 
-export class AppRoutingModule { 
-  
+export class AppRoutingModule {
+
 }

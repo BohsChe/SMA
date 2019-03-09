@@ -14,6 +14,7 @@ import {
   DeleteAgentApiData
 } from "../Models/agent";
 import { AddTransactionApiData } from "../Models/Transaction";
+import { FatDialogData } from "../Models/fat";
 
 @Injectable()
 export class HttpRequestServiceService {
@@ -235,6 +236,31 @@ export class HttpRequestServiceService {
     return this.httpClient.get(this.pageUrl + "/deleteFarmer.php", options);
   }
 
+  addOrUpdateFat(fatData: FatDialogData) {
+    const options = {
+      params: new HttpParams()
+        .set("mobileNo", this.userDetails.mobileNo)
+        .set("fatType", fatData.fatType)
+        .set("fat", fatData.fatData.fat)
+        .set("fatRate", fatData.fatData.fat_rate)
+    };
+    return this.httpClient.get(
+      this.pageUrl + "/addOrUpdateFatRate.php",
+      options
+    );
+  }
+
+  deleteFat(fatData: FatDialogData) {
+    const options = {
+      params: new HttpParams()
+        .set("mobileNo", this.userDetails.mobileNo)
+        .set("fatType", fatData.fatType)
+        .set("fat", fatData.fatData.fat)
+        .set("fatRate", fatData.fatData.fat_rate)
+    };
+    return this.httpClient.get(this.pageUrl + "/deleteFatRate.php", options);
+  }
+
   /**
    * to insert transaction
    * mobileNo:{{mobileNumber}}
@@ -256,7 +282,12 @@ export class HttpRequestServiceService {
     });
   }
 
-  /**
-   *
-   */
+  getFatsList(fatFilter): any {
+    const options = {
+      params: new HttpParams()
+        .set("mobileNo", this.userDetails.mobileNo)
+        .set("fatType", fatFilter.fatType)
+    };
+    return this.httpClient.get(this.pageUrl + "/getFatRates.php", options);
+  }
 }
